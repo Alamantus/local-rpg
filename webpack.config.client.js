@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
-const APP_DIR = path.resolve(__dirname, 'src');
+const APP_DIR = path.resolve(__dirname, 'src/client');
 
 const webpackExport = {
   entry: APP_DIR + '/index.js',
@@ -37,17 +37,17 @@ const webpackExport = {
           'css-loader',
         ],
       },
-      {
-        test: /\.(html?)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]'
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.(html?)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]'
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         use: [
@@ -95,7 +95,7 @@ const webpackExport = {
     // Make sure Webpack knows that .jsx is a thing to watch out for.
     extensions: [
       '.js',
-      '.jsx',
+      '.json',
     ],
   },
 
@@ -109,7 +109,8 @@ const webpackExport = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'src/client/index.html',
+      filename: 'client.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -126,14 +127,7 @@ const webpackExport = {
     }),
   ],
 
-  devtool: 'source-map',
-
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    compress: true,
-    port: 3013,
-    historyApiFallback: true,
-  }
+  devtool: 'source-map'
 };
 
 module.exports = webpackExport;
