@@ -50,6 +50,7 @@ function createWindow () {
 
 // When Electron has finished initializing, start the http server.
 server.use(express.static('build'));
+
 server.get('/', (req, res) => {
   const chatPath = path.join(__dirname, '../../build/client.html');
   res.sendFile(chatPath);
