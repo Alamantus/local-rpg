@@ -14,6 +14,8 @@ To have a locally hosted pen and paper RPG experience using laptops and various 
 - Asset Management
   - an "asset window", which is viewable by all players, and managed by the Master computer
   - updates dynamically on change
+- Map
+  - draggable tiled map for use in the "asset window"
 
 ### Stretch Features
 - Custom Effects
