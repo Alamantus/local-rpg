@@ -1,12 +1,10 @@
 export class Die {
   constructor (sides, {
-    sides = [1,2,3,4,5,6],
-    numberSides = sides.length(),
-    sideShowing = sides[0]
+    sides = [1,2,3,4,5,6]
   } = {}) {
-    this.numberSides = sides.numberSides
-    this.sides = sides.sides
-    this.sideShowing = sides.sideShowing
+    this.sides = sides
+    this.numberSides = sides.length()
+    this.sideShowing = sides[0]
   }
 
   rollSelf {
