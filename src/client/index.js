@@ -9,7 +9,6 @@ import '../global/style.css';
 // import 'jquery-ui/themes/base/autocomplete.css';
 // import 'jquery-ui/themes/base/theme.css';
 
-import $ from 'jquery';
 import io from 'socket.io-client';
 // For using jQuery UI: https://stackoverflow.com/a/42465244
 

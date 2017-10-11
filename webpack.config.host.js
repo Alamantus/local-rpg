@@ -100,6 +100,11 @@ const webpackExport = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
     new webpack.DefinePlugin({
       BASEPATH: JSON.stringify(''),
     }),
