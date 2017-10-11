@@ -3,7 +3,7 @@ export class Die {
     sides = [1,2,3,4,5,6]
   } = {}) {
     this.sides = sides
-    this.numberSides = sides.length()
+    this.numberSides = sides.length
     this.sideShowing = sides[0]
   }
 
