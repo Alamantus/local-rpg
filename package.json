@@ -7,12 +7,11 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "npm run build && npm run start:app",
     "start:app": "electron ./src/host/server.js",
-    "dist": "npm run build && npm run build:dist",
+    "dist": "npm run build && electron-builder",
     "build": "npm run build:clean && npm run build:host && npm run build:client",
-    "build:clean": "rimraf ./build",
+    "build:clean": "rimraf ./build ./dist",
     "build:client": "webpack --config webpack.config.client.js --progress --colors",
-    "build:host": "webpack --config webpack.config.host.js --progress --colors",
-    "build:dist": "electron-builder"
+    "build:host": "webpack --config webpack.config.host.js --progress --colors"
   },
   "author": "Robbie Antenesse <dev@alamantus.com>",
   "build": {
