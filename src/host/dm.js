@@ -9,19 +9,22 @@ import '../global/style.css';
 // import 'jquery-ui/themes/base/autocomplete.css';
 // import 'jquery-ui/themes/base/theme.css';
 
-import $ from 'jquery';
 import io from 'socket.io-client';
 // For using jQuery UI: https://stackoverflow.com/a/42465244
 
-$(function () {
+import { MovablePiece } from '../global/display/MovablePiece';
+
+$(() => {
   const socket = io('http://localhost:3000');
-  $('form').submit(function(){
+  $('form').submit(() => {
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;
   });
 
-  socket.on('chat message', function(msg){
+  socket.on('chat message', msg => {
     $('#messages').append($('<li>').text(msg));
   });
+
+  const piece = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png');
 });
