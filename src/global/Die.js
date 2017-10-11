@@ -1,7 +1,7 @@
 export class Die {
   constructor (sides, {
     sides = [1,2,3,4,5,6],
-    numberSides = sides.length()
+    numberSides = sides.length(),
     sideShowing = sides[0]
   } = {}) {
     this.numberSides = sides.numberSides
