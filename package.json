@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && npm run start:app",
-    "start:app": "electron ./src/host/app.js",
+    "start:app": "electron ./src/host/server.js",
     "build": "npm run build:clean && npm run build:host && npm run build:client",
     "build:clean": "rimraf ./build",
     "build:client": "webpack --config webpack.config.client.js --progress --colors",
