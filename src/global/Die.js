@@ -12,5 +12,9 @@ export class Die {
     this.sideShowing = sides[sideNumber]
     return this.sideShowing
   }
+
+  checkSideShowing {
+    return this.sideShowing
+  }
 }
 
