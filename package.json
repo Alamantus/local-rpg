@@ -2,17 +2,32 @@
   "name": "local-rpg",
   "version": "0.0.1",
   "description": "A platform for serving role playing resources over a local network.",
-  "main": "index.js",
+  "main": "./src/host/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "electron-builder install-app-deps",
     "start": "npm run build && npm run start:app",
     "start:app": "electron ./src/host/server.js",
+    "dist": "npm run build && npm run build:dist",
     "build": "npm run build:clean && npm run build:host && npm run build:client",
     "build:clean": "rimraf ./build",
     "build:client": "webpack --config webpack.config.client.js --progress --colors",
-    "build:host": "webpack --config webpack.config.host.js --progress --colors"
+    "build:host": "webpack --config webpack.config.host.js --progress --colors",
+    "build:dist": "electron-builder"
   },
   "author": "Robbie Antenesse <dev@alamantus.com>",
+  "build": {
+    "appId": "com.electron.local-rpg",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "directories": {
+      "buildResources": "_build"
+    },
+    "asarUnpack": "./build/*"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -20,6 +35,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
     "css-loader": "^0.28.7",
+    "electron-builder": "^19.36.0",
     "electron-prebuilt": "^1.4.13",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",

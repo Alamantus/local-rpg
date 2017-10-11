@@ -91,6 +91,11 @@ const webpackExport = {
     ],
   },
 
+  node: {
+    __dirname: false,
+    __filename: false
+  },
+
   resolve: {
     // Make sure Webpack knows that .jsx is a thing to watch out for.
     extensions: [

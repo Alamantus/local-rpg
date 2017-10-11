@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-var os = require('os');
 
 class App {
   constructor () {
@@ -9,19 +8,6 @@ class App {
   }
 
   init () {
-    const interfaces = os.networkInterfaces();
-    const addresses = [];
-    for (let k in interfaces) {
-        for (let k2 in interfaces[k]) {
-            const address = interfaces[k][k2];
-            if (address.family === 'IPv4' && !address.internal) {
-                addresses.push(address.address);
-            }
-        }
-    }
-
-    console.log(addresses);
-
     app.on('ready', this.createWindow);
 
     // Quit when all windows are closed.

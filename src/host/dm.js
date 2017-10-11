@@ -26,6 +26,10 @@ $(() => {
     $('#messages').append($('<li>').text(msg));
   });
 
+  socket.on('console.log', value => {
+    console.log(value);
+  });
+
   // socket.on('moved piece', pieceData => {
   //   $(`#${pieceData.id}`).css({ top: pieceData.position.top, left: pieceData.position.left });
   // });
