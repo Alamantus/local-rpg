@@ -22,6 +22,11 @@ io.on('connection', socket => {
     console.log('message: ' + msg);
   });
 
+  socket.on('moved piece', function(pieceData){
+    io.emit('moved piece', pieceData);
+    console.log(`movedPiece:\n\tid: ${pieceData.id}\n\ttop: ${pieceData.position.top}, left: ${pieceData.position.left}`);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });

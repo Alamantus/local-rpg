@@ -4,10 +4,10 @@ import 'babel-polyfill';
 
 import '../global/style.css';
 
-// import 'jquery-ui/themes/base/core.css';
-// import 'jquery-ui/themes/base/menu.css';
-// import 'jquery-ui/themes/base/autocomplete.css';
-// import 'jquery-ui/themes/base/theme.css';
+import 'jquery-ui/themes/base/core.css';
+import 'jquery-ui/themes/base/menu.css';
+import 'jquery-ui/themes/base/autocomplete.css';
+import 'jquery-ui/themes/base/theme.css';
 
 import io from 'socket.io-client';
 // For using jQuery UI: https://stackoverflow.com/a/42465244
@@ -26,5 +26,17 @@ $(() => {
     $('#messages').append($('<li>').text(msg));
   });
 
-  const piece = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png');
+  // socket.on('moved piece', pieceData => {
+  //   $(`#${pieceData.id}`).css({ top: pieceData.position.top, left: pieceData.position.left });
+  // });
+
+  const piece = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', {
+    socket: socket,
+  });
+
+  const piece2 = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', {
+    socket: socket,
+    top: 3,
+    left: 400,
+  });
 });

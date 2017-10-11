@@ -12,6 +12,8 @@ import '../global/style.css';
 import io from 'socket.io-client';
 // For using jQuery UI: https://stackoverflow.com/a/42465244
 
+import { MovablePiece } from '../global/display/MovablePiece';
+
 $(function () {
   const socket = io();
   $('form').submit(function(){
@@ -22,5 +24,15 @@ $(function () {
 
   socket.on('chat message', function(msg){
     $('#messages').append($('<li>').text(msg));
+  });
+
+  const piece = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', {
+    socket: socket,
+  });
+
+  const piece2 = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', {
+    socket: socket,
+    top: 3,
+    left: 400,
   });
 });
