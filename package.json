@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && npm run start:app",
-    "start:app": "electron ./src/host/app.js",
+    "start:app": "electron ./src/host/server.js",
     "build": "npm run build:clean && npm run build:host && npm run build:client",
     "build:clean": "rimraf ./build",
     "build:client": "webpack --config webpack.config.client.js --progress --colors",
@@ -32,6 +32,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "express": "^4.16.2",
+    "fs-jetpack": "^1.2.0",
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
