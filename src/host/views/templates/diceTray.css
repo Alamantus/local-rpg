@@ -1,0 +1,7 @@
+#diceTrayContainer {
+  background: #fff;
+  padding: 3px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}

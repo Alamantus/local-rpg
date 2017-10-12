@@ -1,6 +1,8 @@
 import html from 'choo/html';
 
-import { Die } from 
+import './diceTray.css';
+
+import { Die } from '../../../global/Die';
 
 export default (state, emit) => {
   // Manage this view's state
@@ -12,6 +14,16 @@ export default (state, emit) => {
     };
   }
   const viewState = state.viewStates['diceTray'];
+
+  const open = () => {
+    viewState.isOpen = true;
+    emit('render');
+  }
+
+  const close = () => {
+    viewState.isOpen = false;
+    emit('render');
+  }
 
   const roll = () => {
     const faces = [];
@@ -30,26 +42,22 @@ export default (state, emit) => {
       rolls,
     };
     console.log(rollData);
-    state.socket.emit('roll die', rollData);
+    // state.socket.emit('roll die', rollData);
   }
 
-  const trayHTML = html`<div>
+  const trayHTML = html`<div id="diceTrayContainer">
     <div id="diceTrayButton">
       <a onclick=${() => {
         if (viewState.isOpen) {
-          $('#diceTray').slideUp('fast', () => {
-            viewState.isOpen = false;
-          });
+          $('#diceTray').slideUp('fast', () => close());  // Run close() from above when finished
         } else {
-          $('#diceTray').slideDown('fast', () => {
-            viewState.isOpen = true;
-          });
+          $('#diceTray').slideDown('fast', () => open()); // Run open() from above when finished
         }
       }}>
         ${ viewState.isOpen ? 'Close' : 'Open' } Dice Tray
       </a>
     </div>
-    <div id="diceTray">
+    <div id="diceTray" style=${viewState.isOpen ? null : 'display: none;'}}>
       <label>Sides<br />
         <input type="number" onchange=${event => {
           viewState.sides = parseInt(event.target.value)

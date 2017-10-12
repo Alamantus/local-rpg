@@ -1,5 +1,7 @@
 import html from 'choo/html';
 
+import diceTray from './diceTray';
+
 // A wrapper for views to enable consistent headers/footers without ever repeating code.
 export default (state, emit, htmlContent) => {
   // Manage this view's state
@@ -18,6 +20,8 @@ export default (state, emit, htmlContent) => {
     }}>Chat Screen</a>
 
     ${ htmlContent }
+
+    ${ diceTray(state, emit) }
   </div>`;
 
   return pageHTML;
