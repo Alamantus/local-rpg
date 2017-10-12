@@ -26,6 +26,7 @@ app.use((state, emitter) => {
   state.currentView = 'main';
   state.viewStates = {};
   state.logs = [];
+  state.dieRolls = [];
   state.chats = {
     main: [],
   };
@@ -37,10 +38,19 @@ app.use((state, emitter) => {
       state.currentView = newView;
       emitter.emit('render'); // This is how you update the display after changing state!
     });
+    emitter.on('roll die', newView => {
+      state.currentView = newView;
+      emitter.emit('render'); // This is how you update the display after changing state!
+    });
 
     // Socket listeners
     state.socket.on('chat message', msg => {
       state.chats.main.push(msg);
+
+      emitter.emit('render');
+    });
+    state.socket.on('roll die', dieData => {
+      state.dieRolls.push(dieData);
 
       emitter.emit('render');
     });
