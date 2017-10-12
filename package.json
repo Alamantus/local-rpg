@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "choo": "^6.4.2",
     "express": "^4.16.2",
     "fs-jetpack": "^1.2.0",
     "jquery": "^3.2.1",
