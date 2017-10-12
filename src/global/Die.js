@@ -1,20 +1,17 @@
 export class Die {
-  constructor (sides, {
-    sides = [1,2,3,4,5,6]
-  } = {}) {
-    this.sides = sides
-    this.numberSides = sides.length
-    this.sideShowing = sides[0]
+  constructor (faces = [1,2,3,4,5,6]) {
+    this.faces = faces
+    this.numberSides = faces.length
+    this.sideShowing = faces[0]
   }
 
-  rollSelf {
+  rollSelf () {
     var sideNumber = Math.floor(Math.random() * this.numberSides)
-    this.sideShowing = sides[sideNumber]
+    this.sideShowing = this.faces[sideNumber]
     return this.sideShowing
   }
 
-  checkSideShowing {
+  checkSideShowing () {
     return this.sideShowing
   }
 }
-
