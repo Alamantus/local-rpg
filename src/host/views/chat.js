@@ -1,6 +1,5 @@
 import html from 'choo/html';
-
-import container from './templates/pageContainer';
+import onload from 'on-load';
 
 export default (state, emit) => {
   // Manage this view's state
@@ -11,7 +10,7 @@ export default (state, emit) => {
   }
   const viewState = state.viewStates['chat'];
 
-  const pageHTML = html`<div>
+  const view = html`<div>
     <ul id="messages">
     ${
       state.chats.main.map(value => {
@@ -30,5 +29,8 @@ export default (state, emit) => {
     </div>
   </div>`;
 
-  return container(state, emit, pageHTML);
+  // Demo of onload
+  onload(view, () => console.log('opened chat screen'), () => console.log('closed chat screen'));
+
+  return view;
 }

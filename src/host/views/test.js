@@ -11,9 +11,7 @@ export default (state, emit) => {
   // }
   // const viewState = state.viewStates['test'];
 
-  const pageHTML = html`<div>
+  return html`<div>
     <h2>This is the test page!</h2>
   </div>`;
-
-  return container(state, emit, pageHTML);
 }

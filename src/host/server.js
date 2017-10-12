@@ -40,6 +40,10 @@ io.on('connection', socket => {
     console.log(`movedPiece:\n\tid: ${pieceData.id}\n\ttop: ${pieceData.position.top}, left: ${pieceData.position.left}`);
   });
 
+  socket.on('roll die', function(rollData){
+    io.emit('roll die', rollData);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });

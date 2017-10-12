@@ -1,17 +1,36 @@
+import html from 'choo/html';
+
+import diceTray from './views/templates/diceTray';
+
 import testView from './views/test';
 import chatView from './views/chat';
 
 export default (state, emit) => {
   // In viewManager all we are doing is checking the app's state
   // and passing the state and emit to the relevant view.
+  let htmlContent = html`<div>loading</div>`;
   switch (state.currentView) {
     default: {
-      return testView(state, emit);
+      htmlContent = testView(state, emit);
       break;
     }
     case 'chat': {
-      return chatView(state, emit);
+      htmlContent = chatView(state, emit);
       break;
     }
   }
+
+  const view = html`<div>
+    <a onclick=${() => {
+      emit('change view', 'test');
+    }}>Test Screen</a> | <a onclick=${() => {
+      emit('change view', 'chat');
+    }}>Chat Screen</a>
+
+    ${ htmlContent }
+
+    ${ diceTray(state, emit) }
+  </div>`;
+
+  return view;
 }

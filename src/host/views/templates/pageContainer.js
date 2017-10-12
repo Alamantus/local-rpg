@@ -12,7 +12,7 @@ export default (state, emit, htmlContent) => {
   // }
   // const viewState = state.viewStates['pageContainer'];
 
-  const pageHTML = html`<div>
+  const pageHTML = html`<div onload=${() => console.log('load')}>
     <a onclick=${() => {
       emit('change view', 'test');
     }}>Test Screen</a> | <a onclick=${() => {
