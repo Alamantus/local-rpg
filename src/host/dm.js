@@ -35,13 +35,14 @@ app.use((state, emitter) => {
     // Emitter listeners
     emitter.on('change view', newView => {
       state.currentView = newView;
+      emitter.emit('render'); // This is how you update the display after changing state!
     });
 
     // Socket listeners
     state.socket.on('chat message', msg => {
       state.chats.main.push(msg);
 
-      emitter.emit('render'); // This is how you update the display after changing state!
+      emitter.emit('render');
     });
 
     state.socket.on('console.log', value => {
