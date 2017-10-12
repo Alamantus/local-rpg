@@ -46,7 +46,7 @@ io.on('connection', socket => {
 });
 
 http.listen(3000, () => {
-  console.log('listening on *:3000');
+  console.log(`Connect on ${addresses[(addresses.length - 1)]}:3000`);
 
   app.init();
 });
