@@ -28,10 +28,11 @@ const webpackExport = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(sc|sa|c)ss$/,
         use: [
           'style-loader',
           'css-loader',
+          'sass-loader'
         ],
       },
       {
