@@ -1,0 +1,24 @@
+#diceTrayContainer {
+  background: #fff;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+#diceRolls {
+  height: 78%;
+  overflow-y: auto;
+}
+#diceTrayForm {
+  position: absolute;
+  height: 20%;
+  bottom: 0;
+}
+#diceTray {
+  padding: 3px;
+  height: 500px;
+  width: 125px;
+  border: 1px solid black;
+}
+#diceTray input {
+  width: 100px;
+}

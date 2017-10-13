@@ -26,6 +26,7 @@ app.use((state, emitter) => {
   state.currentView = 'main';
   state.viewStates = {};
   state.logs = [];
+  state.dieRolls = [];
   state.chats = {
     main: [],
   };
@@ -33,7 +34,18 @@ app.use((state, emitter) => {
   // Listeners
   emitter.on('DOMContentLoaded', () => {
     // Emitter listeners
+    emitter.on('render', () => {
+      // This is a dirty hack to get the rolls screen to scroll to the bottom *after* re-rendering.
+      setTimeout(() => {
+        const rollsDisplay = $('#diceRolls');
+        rollsDisplay.animate({ scrollTop: rollsDisplay.prop("scrollHeight") }, 'fast');
+      }, 100);
+    });
     emitter.on('change view', newView => {
+      state.currentView = newView;
+      emitter.emit('render'); // This is how you update the display after changing state!
+    });
+    emitter.on('roll die', newView => {
       state.currentView = newView;
       emitter.emit('render'); // This is how you update the display after changing state!
     });
@@ -41,6 +53,11 @@ app.use((state, emitter) => {
     // Socket listeners
     state.socket.on('chat message', msg => {
       state.chats.main.push(msg);
+
+      emitter.emit('render');
+    });
+    state.socket.on('roll die', rollData => {
+      state.dieRolls.push(rollData);
 
       emitter.emit('render');
     });
