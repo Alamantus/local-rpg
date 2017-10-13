@@ -13,9 +13,22 @@ export default (state, emit) => {
 
   return html`<div>
   <div class=".xs-block-grid-2 .md-block-grid-3 .lg-block-grid-4:">
-    <div class="block-grid__item card">character</div>
-    <div class="block-grid__item card">character</div>
-    <div class="block-grid__item card">character</div>
+    <div class="block-grid__item card xs-p2">
+      <h3>Character Sheet Name</h3>
+      <h4>Character Sheet Description</h4>
+    </div>
+    <div class="block-grid__item card xs-p2">
+      <h3>Character Sheet Name</h3>
+      <h4>Character Sheet Description</h4>
+    </div>
+    <div class="block-grid__item card xs-p2">
+      <h3>Character Sheet Name</h3>
+      <h4>Character Sheet Description</h4>
+    </div>
+    <div class="block-grid__item card xs-p2">
+      <h3>Character Sheet Name</h3>
+      <h4>Character Sheet Description</h4>
+    </div>
   </div>
 
   </div>`;
