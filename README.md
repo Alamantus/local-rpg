@@ -20,6 +20,8 @@ To have a locally hosted pen and paper RPG experience using laptops and various 
 ### Stretch Features
 - Custom Effects
   - Master computer can choose various players' screens and change the display to represent damage, game effects, and so on
+- "Whisper" chat
+  - private chat system between players and DM
 
 
 ### Install
