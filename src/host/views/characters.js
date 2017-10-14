@@ -29,6 +29,9 @@ export default (state, emit) => {
       <h3>Character Sheet Name</h3>
       <h4>Character Sheet Description</h4>
     </div>
+    <a href=""><div class="block-grid__item card xs-p2">
+      <h3>Add New Sheet</h3>
+    </div></a>
   </div>
 
   </div>`;
