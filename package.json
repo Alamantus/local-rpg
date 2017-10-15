@@ -5,6 +5,8 @@
   "main": "./src/host/server.js",
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm run start:app\"",
+    "dev:host": "concurrently \"npm run watch:host\" \"npm run start:app\"",
+    "dev:client": "concurrently \"npm run watch:client\" \"npm run start:app\"",
     "start": "npm run build && npm run start:app",
     "start:app": "electron ./src/host/server.js",
     "dist": "npm run build && electron-builder",
