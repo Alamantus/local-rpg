@@ -5,6 +5,9 @@ import diceTray from './views/templates/diceTray';
 import testView from './views/test';
 import chatView from './views/chat';
 import charactersView from './views/characters';
+import charactersCreation from './views/characterCreation';
+
+
 
 
 export default (state, emit) => {
@@ -22,6 +25,10 @@ export default (state, emit) => {
     }
     case 'characters': {
       htmlContent = charactersView(state, emit);
+      break;
+    }
+    case 'character creation': {
+      htmlContent = charactersCreation(state, emit);
       break;
     }
   }
