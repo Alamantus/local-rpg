@@ -41,6 +41,7 @@
     "css-loader": "^0.28.7",
     "electron-builder": "^19.36.0",
     "electron-prebuilt": "^1.4.13",
+    "electron-reload": "^1.2.2",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.4.2",
