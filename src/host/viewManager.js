@@ -2,7 +2,7 @@ import html from 'choo/html';
 
 import diceTray from './views/templates/diceTray';
 
-import testView from './views/test';
+import tableView from './views/table';
 import chatView from './views/chat';
 import charactersView from './views/characters';
 import charactersCreation from './views/characterCreation';
@@ -17,7 +17,7 @@ export default (state, emit) => {
   switch (state.currentView) {
     case 'main':
     default: {
-      htmlContent = testView(state, emit);
+      htmlContent = tableView(state, emit);
       break;
     }
     case 'chat': {
@@ -40,7 +40,7 @@ export default (state, emit) => {
         <li class=${ state.currentView === 'main' ? 'is-active' : null }>
           <a onclick=${() => {
             emit('change view', 'main');
-          }}>Test Screen</a>
+          }}>Table</a>
         </li>
         <li class=${ state.currentView === 'chat' ? 'is-active' : null }>
           <a onclick=${() => {
