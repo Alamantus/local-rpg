@@ -1,6 +1,6 @@
 # Local RPG Platform
 
-## Goal
+### Goal
 To have a locally hosted pen and paper RPG experience using laptops and various other devices connected via wifi. The Dungeon/Game Master will use a laptop or desktop computer to manage and display character and monster info, maps, and various other assets. All players can roll dice (and the DM/GM can create custom dice), and display their rolls.
 
 ### Features
@@ -30,6 +30,17 @@ To have a locally hosted pen and paper RPG experience using laptops and various 
 
 ### Build and Run
 
-`npm run start` will build the host and client and start running the host Electron app.
+`npm run start` will build the host and client and start running the host Electron app.  
+`npm run dev` will start webpack watchers and the host Electron app, which will refresh on every change to `build` folder.
 
 Access client by going to localhost (or host computer's local IP address on network) at port 3000
+
+### Contribution
+
+Please see the [`CONTRIBUTION.md`](./CONTRIBUTION.md) for instructions on how to contribute to this project.
+
+Any interactions or contributions to the project must follow the [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+### License
+
+We use the [GNU GPLv3](./LICENSE.txt) license for this project.
