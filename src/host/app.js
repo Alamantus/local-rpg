@@ -2,6 +2,9 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
+// If using npm run dev, electron window will reload when changes are made.
+require('electron-reload')(path.resolve(__dirname, '../../build'));
+
 class App {
   constructor () {
     this.win = null;

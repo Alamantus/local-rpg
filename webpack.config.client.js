@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackExport = require('./webpack.config.base.js');
 
 webpackExport.entry = path.resolve(__dirname, 'src/client', 'index.js');
+webpackExport.output.path = path.resolve(__dirname, 'build/client');
 webpackExport.output.filename = 'local-rpg.js';
 
 webpackExport.plugins.push(new webpack.DefinePlugin({

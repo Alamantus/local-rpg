@@ -19,10 +19,10 @@ for (let k in interfaces) {
 }
 
 // When Electron has finished initializing, start the http server.
-server.use(express.static(path.join(__dirname, '../../build/')));
+server.use(express.static(path.join(__dirname, '../../build/client/')));
 
 server.get('/', (req, res) => {
-  const chatPath = path.join(__dirname, '../../build/client.html');
+  const chatPath = path.join(__dirname, '../../build/client/client.html');
   res.sendFile(chatPath);
 });
 

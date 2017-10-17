@@ -19,10 +19,7 @@ const webpackExport = {
           {
             loader: 'babel-loader',
             options: {
-              "presets": [
-                'es2015',
-                'es2016',
-              ],
+              'presets': ['env'],
             },
           },
         ],
