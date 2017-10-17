@@ -15,6 +15,7 @@ export default (state, emit) => {
   // and passing the state and emit to the relevant view.
   let htmlContent = html`<div>loading</div>`;
   switch (state.currentView) {
+    case 'main':
     default: {
       htmlContent = testView(state, emit);
       break;
@@ -34,15 +35,31 @@ export default (state, emit) => {
   }
 
   const view = html`<div>
-    <a onclick=${() => {
-      emit('change view', 'test');
-    }}>Test Screen</a> | <a onclick=${() => {
-      emit('change view', 'chat');
-    }}>Chat Screen</a> | <a onclick=${() => {
-      emit('change view', 'characters');
-    }}>Characters</a>
+    <nav class="tabs">
+      <ul>
+        <li class=${ state.currentView === 'main' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'main');
+          }}>Test Screen</a>
+        </li>
+        <li class=${ state.currentView === 'chat' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'chat');
+          }}>Chat Screen</a>
+        </li>
+        <li class=${ state.currentView === 'characters' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'characters');
+          }}>Characters</a>
+        </li>
+      </ul>
+    </nav>
 
-    ${ htmlContent }
+    <section class="section">
+      <div class="container">
+        ${ htmlContent }
+      </div>
+    </section>
 
     ${ diceTray(state, emit) }
   </div>`;
