@@ -46,9 +46,10 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "bf-solid": "^2.9.1",
+    "bulma": "^0.6.0",
     "choo": "^6.4.2",
     "express": "^4.16.2",
+    "font-awesome": "^4.7.0",
     "fs-jetpack": "^1.2.0",
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",

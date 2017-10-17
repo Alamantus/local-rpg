@@ -12,15 +12,22 @@ export default (state, emit) => {
   // const viewState = state.viewStates['test'];
 
   return html`<div>
-  <div class="">
-    <div class="card xs-p2">
-    <form>
-      <label>Character Sheet Name</label>
-      <input></input>
-      <label>Character Sheet Description</label>
-      <input></input>
-      <button class="button">Add New Field</button>
-    </form>
+    <div class="field">
+      <label class="label" for="sheetName">Character Sheet Name</label>
+      <div class="control">
+        <input class="input" id="sheetName" type="text" placeholder="Text input" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="sheetDescription">Character Sheet Description</label>
+      <div class="control">
+        <input class="input" id="sheetDescription" type="text" placeholder="Text input" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <a class="button">Add New Field</a>
+      </div>
     </div>
 
   </div>`;
