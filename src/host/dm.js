@@ -75,7 +75,7 @@ app.use((state, emitter) => {
 // triggers the app's emitter listeners.
 app.route('/', viewManager);
 
-app.mount('#app');
+app.mount('body');
 
 // $(() => {
 //

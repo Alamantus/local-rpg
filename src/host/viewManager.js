@@ -34,7 +34,7 @@ export default (state, emit) => {
     }
   }
 
-  const view = html`<div>
+  const view = html`<body>
     <nav class="tabs">
       <ul>
         <li class=${ state.currentView === 'main' ? 'is-active' : null }>
@@ -62,7 +62,7 @@ export default (state, emit) => {
     </section>
 
     ${ diceTray(state, emit) }
-  </div>`;
+  </body>`;
 
   return view;
 }
