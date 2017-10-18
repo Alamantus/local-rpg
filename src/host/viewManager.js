@@ -35,7 +35,7 @@ export default (state, emit) => {
   }
 
   const view = html`<body>
-    <nav class="tabs">
+    <nav class="tabs" style="height: 5%">
       <ul>
         <li class=${ state.currentView === 'main' ? 'is-active' : null }>
           <a onclick=${() => {
@@ -55,8 +55,8 @@ export default (state, emit) => {
       </ul>
     </nav>
 
-    <section class="section">
-      <div class="container">
+    <section class="section" style="height: 90%">
+      <div class="container" style="height: 100%">
         ${ htmlContent }
       </div>
     </section>
