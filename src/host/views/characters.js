@@ -18,9 +18,12 @@ export default (state, emit) => {
         <div class="card-content">
           <h3 class="title is-3">Character Sheet Name</h3>
           <h4 class="subtitle is-4">Character Sheet Description</h4>
-          <a class="button" href="">View</a>
-          <a class="button is-light" href="">Edit</a>
         </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">View</a>
+          <a href="#" class="card-footer-item">Edit</a>
+          <a href="#" class="card-footer-item">Delete</a>
+        </footer>
       </div>
     </div>
     <div class="column is-one-quarter">
@@ -28,9 +31,12 @@ export default (state, emit) => {
         <div class="card-content">
           <h3 class="title is-3">Character Sheet Name</h3>
           <h4 class="subtitle is-4">Character Sheet Description</h4>
-          <a class="button" href="">View</a>
-          <a class="button is-light" href="">Edit</a>
         </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">View</a>
+          <a href="#" class="card-footer-item">Edit</a>
+          <a href="#" class="card-footer-item">Delete</a>
+        </footer>
       </div>
     </div>
     <div class="column is-one-quarter">
@@ -38,9 +44,12 @@ export default (state, emit) => {
         <div class="card-content">
           <h3 class="title is-3">Character Sheet Name</h3>
           <h4 class="subtitle is-4">Character Sheet Description</h4>
-          <a class="button" href="">View</a>
-          <a class="button is-light" href="">Edit</a>
         </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">View</a>
+          <a href="#" class="card-footer-item">Edit</a>
+          <a href="#" class="card-footer-item">Delete</a>
+        </footer>
       </div>
     </div>
     <div class="column is-one-quarter">
