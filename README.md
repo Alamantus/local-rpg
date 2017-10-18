@@ -1,5 +1,7 @@
 # Local RPG Platform
 
+[![Join the chat at https://gitter.im/local-rpg/Lobby](https://badges.gitter.im/local-rpg/Lobby.svg)](https://gitter.im/local-rpg/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Goal
 To have a locally hosted pen and paper RPG experience using laptops and various other devices connected via wifi. The Dungeon/Game Master will use a laptop or desktop computer to manage and display character and monster info, maps, and various other assets. All players can roll dice (and the DM/GM can create custom dice), and display their rolls.
 
