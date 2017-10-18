@@ -4,7 +4,7 @@ In the interest of fostering an open and welcoming environment, we as contributo
 
 This isn't an exhaustive list of things that you can't do. Rather, take it in the spirit in which it's intended - a guide to make it easier to enrich all of us and the technical communities in which we participate.
 
-If you believe someone is violating the code of conduct, we ask that you report it by emailing dev@alamantus.com.
+If you believe someone is violating the code of conduct, we ask that you report it by direct messaging Alamantus (https://gitter.im/Alamantus) or descartez (https://gitter.im/descartez) on Gitter.
 
 ### 1. Be friendly, patient, and helpful
 
@@ -51,12 +51,12 @@ This Code of Conduct applies both within project spaces and other spaces where c
 
 # Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at dev@alamantus.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by direct messaging Alamantus (https://gitter.im/Alamantus) or descartez (https://gitter.im/descartez) on Gitter. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
 # Questions?
 
-If you have questions, please see [the FAQ](https://github.com/Alamantus/local-rpg/wiki/faq). If that doesn't answer your questions, feel free to [contact us](mailto:dev@alamantus.com).
+If you have questions, please see [the FAQ](https://github.com/Alamantus/local-rpg/wiki/faq). If that doesn't answer your questions, feel free to [ask on the Gitter chat](https://gitter.im/orgs/local-rpg).
 
 _This code of conduct is adapted from the [Django Project Code of Conduct](https://www.djangoproject.com/conduct/) and the [Contributor Covenant version 1.4](https://www.contributor-covenant.org/version/1/4/code-of-conduct.html)._

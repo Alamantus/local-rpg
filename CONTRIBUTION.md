@@ -8,7 +8,7 @@ Here are some important resources:
 
 - [Our projects](https://github.com/Alamantus/local-rpg/projects) tells you where we are and what needs to be done.
 - [Our roadmap](https://github.com/Alamantus/local-rpg/wiki/Road-Map) is the 10k foot view of where we're going.
-- Slack: Join our [local-rpg Slack workspace](https://join.slack.com/t/local-rpg/shared_invite/enQtMjU4MzI3MjY1MzMyLTU5NGQ2MjI2MTM5ZjVhMWE4NTM4NGVkMDQzODU0YWIxM2RkYWU2MzdmZjIzMWFhYzI1MjIwOWMzNTU4Zjc1YjQ)--It's a free account, so use reactions whenever no response is required.
+- Join our [local-rpg Gitter](https://gitter.im/local-rpg/Lobby) to chat about the project.
 - [Our wiki](https://github.com/Alamantus/local-rpg/wiki) will be an ever-growing source of information about the app.
 - Bugs? [Github Issues](https://github.com/Alamantus/local-rpg/projects/issues) is where to report them.
 
