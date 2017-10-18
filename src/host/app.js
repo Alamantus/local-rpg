@@ -7,11 +7,20 @@ require('electron-reload')(path.resolve(__dirname, '../../build'));
 
 class App {
   constructor () {
+    app.app = this;
     this.win = null;
+
+    this.server = require('./server');
   }
 
-  init () {
-    app.on('ready', this.createWindow);
+  start () {
+    app.on('ready', () => {
+      this.createWindow();
+      
+      this.server.start(() => {
+        console.log(`Connect on ${this.server.ips[(this.server.ips.length - 1)]}:3000`);
+      });
+    });
 
     // Quit when all windows are closed.
     app.on('window-all-closed', () => {
@@ -55,4 +64,5 @@ class App {
   }
 }
 
-module.exports = new App();
+const localRPG = new App();
+localRPG.start();
