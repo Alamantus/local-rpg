@@ -28,6 +28,8 @@ To have a locally hosted pen and paper RPG experience using laptops and various 
 
 `npm install` or `yarn`
 
+_Every time you pull from the repo, be sure to re-run in case something got added to the project._
+
 ### Build and Run
 
 `npm run start` will build the host and client and start running the host Electron app.  

@@ -18,6 +18,8 @@ Test suites are cool, but they often hinder a small team. If our contributor poo
 
 ## Submitting changes
 
+*Note:* Before ever making any changes, please be sure you make a pull from the master repo.
+
 Please send a [GitHub Pull Request to local-rpg](https://github.com/Alamantus/local-rpg/compare) with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)). If you've added a feature, describe what it is and either how to use it (if it's a user-visible feature) or what it does (if the user doesn't need to interact with it). Please follow our coding conventions (below) and make sure all of your commits are atomic (one feature per commit).
 
 Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
