@@ -1,7 +1,5 @@
 import html from 'choo/html';
 
-import container from './templates/pageContainer';
-
 export default (state, emit) => {
   // Manage this view's state
   // if (!state.viewStates.hasOwnProperty('test')) {
