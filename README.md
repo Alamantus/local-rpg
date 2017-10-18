@@ -1,6 +1,6 @@
 # Local RPG Platform
 
-[![Read our Contribution Guidelines](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](./CONTRIBUTION.md) [![GitHub version](https://badge.fury.io/gh/boennemann%2Fbadges.svg)](http://badge.fury.io/gh/Alamantus%2Flocal-rpg) [![Join the chat at https://gitter.im/local-rpg/Lobby](https://badges.gitter.im/local-rpg/Lobby.svg)](https://gitter.im/local-rpg/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Read our Contribution Guidelines](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](./CONTRIBUTION.md) [![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/Alamantus/local-rpg/issues) [![Join the chat at https://gitter.im/local-rpg/Lobby](https://badges.gitter.im/local-rpg/Lobby.svg)](https://gitter.im/local-rpg/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [<img height='20' style='border:0px;height:20px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />](https://ko-fi.com/alamantus)
 
 ## Goal
 To have a locally hosted pen and paper RPG experience using laptops and various other devices connected via wifi. The Dungeon/Game Master will use a laptop or desktop computer to manage and display character and monster info, maps, and various other assets. All players can roll dice (and the DM/GM can create custom dice), and display their rolls.
