@@ -39,8 +39,8 @@ app.use((state, emitter) => {
     emitter.on('render', () => {
       // This is a dirty hack to get the rolls screen to scroll to the bottom *after* re-rendering.
       setTimeout(() => {
-        const rollsDisplay = $('#diceRolls');
-        rollsDisplay.animate({ scrollTop: rollsDisplay.prop("scrollHeight") }, 'fast');
+        const log = $('#log');
+        log.animate({ scrollTop: log.prop("scrollHeight") }, 'fast');
       }, 100);
     });
     emitter.on('change view', newView => {
