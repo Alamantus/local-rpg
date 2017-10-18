@@ -10,13 +10,14 @@ export class DiceTrayController extends ViewController {
       isOpen: false,
       sides: 6,
       number: 1,
+      roll: null,
     });
 
     // If using controller methods in an input's onchange or onclick instance like this one's is,
     // either bind the class's 'this' instance to the method first...
     this.updateSides = this.updateSides.bind(this);
     this.updateNumber = this.updateNumber.bind(this);
-    this.roll = this.roll.bind(this);
+    this.show = this.show.bind(this);
     // or use `onclick=${() => controller.submit()}` to maintain the 'this' of the class instead.
   }
 
@@ -38,7 +39,7 @@ export class DiceTrayController extends ViewController {
     this.state.number = parseInt(event.target.value);
   }
 
-  roll () {
+  roll (emit) {
     const faces = [];
     for (let f = 1; f <= this.state.sides; f++) {
       faces.push(f);
@@ -64,7 +65,14 @@ export class DiceTrayController extends ViewController {
       rolls,
       total,
     };
-    console.log(rollData);
-    this.appState.socket.emit('roll die', rollData);
+    this.state.roll = rollData;
+    emit('render');
+  }
+
+  show () {
+    if (this.state.roll) {
+      this.appState.socket.emit('roll die', this.state.roll);
+      this.state.roll = null;
+    }
   }
 }

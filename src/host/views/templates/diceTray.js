@@ -23,22 +23,51 @@ export default (state, emit) => {
       </a>
     </div>
     <div id="diceTray" class="box" style=${controller.state.isOpen ? null : 'display: none;'}}>
-      <div id="diceTrayForm">
-        <div class="field">
-          <label class="label">Sides</label>
-          <div class="control">
-            <input class="input" type="number" value=${ controller.state.sides } onchange=${ controller.updateSides } />
+      <div class="columns">
+        <div id="diceTrayForm" class="column is-one-third">
+          <div class="field">
+            <label class="label">Sides</label>
+            <div class="control">
+              <input class="input" type="number" value=${ controller.state.sides } onchange=${ controller.updateSides } />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Number</label>
+            <div class="control">
+              <input class="input" type="number" value=${ controller.state.number } onchange=${ controller.updateNumber } />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <a class="button is-primary" onclick=${() => controller.roll(emit)}>Roll</a>
+            </div>
           </div>
         </div>
-        <div class="field">
-          <label class="label">Number</label>
-          <div class="control">
-            <input class="input" type="number" value=${ controller.state.number } onchange=${ controller.updateNumber } />
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <a class="button is-primary" onclick=${controller.roll}>Roll</a>
+        <div class="column is-two-thirds">
+          <div id="diceTrayRoll" class="box">
+            ${
+              controller.state.roll
+              ? html`<div class="content">
+                  <p>
+                    Rolled ${ controller.state.roll.rolls.length } ${ controller.state.roll.dieName }<br />
+                    ${
+                      (controller.state.roll.rolls.length > 1)
+                      ? html`<span>${ controller.state.roll.rolls.join(' + ') }<br /></span>`
+                      : ''
+                    }
+                    <strong>= ${ controller.state.roll.total }</strong>
+                  </p>
+                </div>`
+              : html`<div class="content"></div>`
+            }
+            
+            <div class="field">
+              <div class="control">
+                <a class="button is-success" disabled=${ !controller.state.roll ? true : null } onclick=${ controller.show }>
+                  Show Roll
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
