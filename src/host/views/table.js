@@ -1,16 +1,9 @@
 import html from 'choo/html';
 
+import { TableController } from '../controllers/TableController';
+
 export default (state, emit) => {
-  // Manage this view's state
-  if (!state.viewStates.hasOwnProperty('table')) {
-    state.viewStates['table'] = {
-      assetWindow: {
-        tableImage: null,
-        pieces: [],
-      },
-    };
-  }
-  const viewState = state.viewStates['table'];
+  const controller = new TableController(state);
 
   return html`<div class="tile is-ancestor">
     <div class="tile is-parent is-8">
