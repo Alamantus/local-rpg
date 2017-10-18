@@ -1,14 +1,10 @@
 import html from 'choo/html';
 import onload from 'on-load';
 
+import { ChatController } from '../controllers/ChatController';
+
 export default (state, emit) => {
-  // Manage this view's state
-  if (!state.viewStates.hasOwnProperty('chat')) {
-    state.viewStates['chat'] = {
-      chatInput: '',
-    };
-  }
-  const viewState = state.viewStates['chat'];
+  const controller = new ChatController(state);
 
   const view = html`<div>
     <ul id="messages">
@@ -19,13 +15,8 @@ export default (state, emit) => {
     }
     </ul>
     <div id="chatForm">
-      <input id="m" autocomplete="off" value=${viewState.chatInput} onchange=${event => {
-        viewState.chatInput = event.target.value;
-      }} />
-      <button onclick=${() => {
-        state.socket.emit('chat message', viewState.chatInput);
-        viewState.chatInput = '';
-      }}>Send</button>
+      <input id="m" autocomplete="off" value=${controller.state.chatInput} onchange=${controller.input} />
+      <button onclick=${() => controller.submit()}>Send</button>
     </div>
   </div>`;
 
