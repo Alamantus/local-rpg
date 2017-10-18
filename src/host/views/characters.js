@@ -18,6 +18,8 @@ export default (state, emit) => {
         <div class="card-content">
           <h3 class="title is-3">Character Sheet Name</h3>
           <h4 class="subtitle is-4">Character Sheet Description</h4>
+          <a class="button" href="">View</a>
+          <a class="button is-light" href="">Edit</a>
         </div>
       </div>
     </div>
@@ -26,6 +28,8 @@ export default (state, emit) => {
         <div class="card-content">
           <h3 class="title is-3">Character Sheet Name</h3>
           <h4 class="subtitle is-4">Character Sheet Description</h4>
+          <a class="button" href="">View</a>
+          <a class="button is-light" href="">Edit</a>
         </div>
       </div>
     </div>
@@ -34,14 +38,8 @@ export default (state, emit) => {
         <div class="card-content">
           <h3 class="title is-3">Character Sheet Name</h3>
           <h4 class="subtitle is-4">Character Sheet Description</h4>
-        </div>
-      </div>
-    </div>
-    <div class="column is-one-quarter">
-      <div class="card">
-        <div class="card-content">
-          <h3 class="title is-3">Character Sheet Name</h3>
-          <h4 class="subtitle is-4">Character Sheet Description</h4>
+          <a class="button" href="">View</a>
+          <a class="button is-light" href="">Edit</a>
         </div>
       </div>
     </div>
