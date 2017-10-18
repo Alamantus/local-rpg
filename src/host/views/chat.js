@@ -15,8 +15,8 @@ export default (state, emit) => {
     }
     </ul>
     <div id="chatForm">
-      <input id="m" autocomplete="off" value=${controller.state.chatInput} onchange=${controller.input} />
-      <button onclick=${() => controller.submit()}>Send</button>
+      <input id="m" autocomplete="off" value=${ controller.state.chatInput } onchange=${ controller.input } />
+      <button onclick=${ () => controller.submit() }>Send</button>
     </div>
   </div>`;
 
