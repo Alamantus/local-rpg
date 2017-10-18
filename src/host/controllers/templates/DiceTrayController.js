@@ -32,11 +32,17 @@ export class DiceTrayController extends ViewController {
   }
 
   updateSides (event) {
-    this.state.sides = parseInt(event.target.value);
+    const sides = parseInt(event.target.value);
+
+    // Restrict lowest sides roll to 2
+    this.state.sides = sides > 1 ? sides : 2;
   }
 
   updateNumber (event) {
-    this.state.number = parseInt(event.target.value);
+    const number = parseInt(event.target.value);
+
+    // Restrict lowest number to 1
+    this.state.number = number > 0 ? number : 1;
   }
 
   roll (emit) {
