@@ -30,6 +30,11 @@ export default (state, emit) => {
       htmlContent = characterCreation(state, emit);
       break;
     }
+    case 'dice': {
+      // Host-only view
+      htmlContent = charactersView(state, emit);
+      break;
+    }
     case 'notes': {
       htmlContent = notesView(state, emit);
       break;
@@ -53,6 +58,11 @@ export default (state, emit) => {
           <a onclick=${() => {
             emit('change view', 'sheets');
           }}>Sheets</a>
+        </li>
+        <li class=${ state.currentView === 'dice' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'dice');
+          }}>Dice</a>
         </li>
         <li class=${ state.currentView === 'notes' ? 'is-active' : null }>
           <a onclick=${() => {
