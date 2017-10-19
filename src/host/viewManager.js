@@ -6,6 +6,7 @@ import tableView from './views/table';
 import chatView from './views/chat';
 import charactersView from './views/characters';
 import characterCreation from './views/characterCreation';
+import notesView from './views/notes';
 
 export default (state, emit) => {
   // In viewManager all we are doing is checking the app's state
@@ -29,6 +30,10 @@ export default (state, emit) => {
       htmlContent = characterCreation(state, emit);
       break;
     }
+    case 'notes': {
+      htmlContent = notesView(state, emit);
+      break;
+    }
   }
 
   const view = html`<body>
@@ -48,6 +53,11 @@ export default (state, emit) => {
           <a onclick=${() => {
             emit('change view', 'sheets');
           }}>Sheets</a>
+        </li>
+        <li class=${ state.currentView === 'notes' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'notes');
+          }}>Notes</a>
         </li>
       </ul>
     </nav>
