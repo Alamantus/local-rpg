@@ -27,10 +27,15 @@ export default (state, emit) => {
         </div>
         ${
           controller.currentPageNotes.map(note => {
-            const noteClass = `panel-block${ controller.state.displayedNote === note.index ? ' is-active' : '' }`;
+            const isCurrent = note.index === controller.state.displayedNote;
+            const noteClass = `panel-block${ isCurrent ? ' is-active' : '' }`;
             return html`<a class=${ noteClass } onclick=${ () => controller.open(emit, note.index) }>
-              ${ note.name }
-              <span class="tag">${ moment(note.updated).calendar() }</span>
+              <span style=${ isCurrent ? 'font-weight: bold;' : false }>
+                ${ note.name }
+              </span>
+              <span class="note-date">
+                ${ moment(note.updated).calendar() }
+              </span>
             </a>`;
           })
         }

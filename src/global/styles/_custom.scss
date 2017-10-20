@@ -1,5 +1,14 @@
+@import '../../../node_modules/bulma/sass/elements/tag';
+
 .tabs {
   &:not(:last-child) {
     margin-bottom: 0.5rem;
   }
+}
+
+.note-date {
+  @extend .tag;
+
+  margin-left: 0.5rem;
+  margin-right: 0
 }
