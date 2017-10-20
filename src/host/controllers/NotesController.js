@@ -33,7 +33,7 @@ export class NotesController extends ViewController {
       const sort = (a[byField] > b[byField]) ? 1 : -1;
       return ascending ? sort : sort * -1;
     });
-    
+
     this.updateNoteIndices();
   }
 
@@ -60,6 +60,12 @@ export class NotesController extends ViewController {
 
     // Return the newly created note's index.
     return 0;
+  }
+
+  delete (emit, noteIndex) {
+    this.state.notes.splice(noteIndex, 1);
+    this.updateNoteIndices();
+    this.close(emit);
   }
 
   open (emit, noteIndex) {
