@@ -68,9 +68,13 @@ export class NotesController extends ViewController {
     this.close(emit);
   }
 
+  populateTextarea () {
+    $('#displayedNote').val(this.currentNote.content);
+  }
+
   open (emit, noteIndex) {
     this.state.displayedNote = parseInt(noteIndex);
-    emit('render');
+    emit('render', () => this.populateTextarea());
   }
 
   close (emit) {
@@ -88,7 +92,7 @@ export class NotesController extends ViewController {
     this.currentNote.name = value;
     this.currentNote.updated = Date.now();
 
-    emit('render');
+    emit('render', () => this.populateTextarea());
   }
 
   updateNote (emit, event) {
@@ -100,7 +104,5 @@ export class NotesController extends ViewController {
     }
     this.currentNote.content = value;
     this.currentNote.updated = Date.now();
-
-    emit('render');
   }
 }

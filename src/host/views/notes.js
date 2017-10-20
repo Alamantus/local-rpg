@@ -89,7 +89,9 @@ export default (state, emit) => {
           </div>
           <div class="field">
             <div class="control">
-              <textarea class="textarea" onchange=${ event => controller.updateNote(emit, event) }>${ controller.currentNote.content }</textarea>
+              <textarea id="displayedNote" class="textarea" onchange=${ event => controller.updateNote(emit, event) }>
+              <!-- Value populated on certain renders. See controller. -->
+              </textarea>
             </div>
           </div>
           <div class="field">
