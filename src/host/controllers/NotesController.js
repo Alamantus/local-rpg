@@ -19,8 +19,6 @@ export class NotesController extends ViewController {
   }
 
   get currentPageNotes () {
-    this.sortNotes();
-
     const { notes, currentPage } = this.state;
     return notes.slice(currentPage * this.notesPerPage, (currentPage + 1) * this.notesPerPage);
   }
@@ -29,13 +27,17 @@ export class NotesController extends ViewController {
     return this.state.notes[this.state.displayedNote];
   }
 
-  sortNotes () {
+  sortNotes (byField, ascending = true) {
     this.state.notes.sort((a, b) => {
-      if (a.created == b.created) return 0;
-      return (a.created > b.created) ? 1 : -1;
+      if (a[byField] == b[byField]) return 0;
+      const sort = (a[byField] > b[byField]) ? 1 : -1;
+      return ascending ? sort : sort * -1;
     });
+    
+    this.updateNoteIndices();
+  }
 
-    // Set the notes' indices for easy access.
+  updateNoteIndices () {
     this.state.notes.forEach((note, index) => {
       note.index = index;
     });
@@ -53,12 +55,11 @@ export class NotesController extends ViewController {
       updated: Date.now(),
       content: '',
     };
-    this.state.notes.push(newNote);
-
-    this.sortNotes();
+    this.state.notes.unshift(newNote);
+    this.updateNoteIndices();
 
     // Return the newly created note's index.
-    return this.state.notes.length - 1;
+    return 0;
   }
 
   open (emit, noteIndex) {
@@ -81,7 +82,6 @@ export class NotesController extends ViewController {
     this.currentNote.name = value;
     this.currentNote.updated = Date.now();
 
-    this.sortNotes();
     emit('render');
   }
 
@@ -95,7 +95,6 @@ export class NotesController extends ViewController {
     this.currentNote.content = value;
     this.currentNote.updated = Date.now();
 
-    this.sortNotes();
     emit('render');
   }
 }
