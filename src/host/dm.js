@@ -36,12 +36,14 @@ app.use((state, emitter) => {
   // Listeners
   emitter.on('DOMContentLoaded', () => {
     // Emitter listeners
-    emitter.on('render', () => {
-      // This is a dirty hack to get the rolls screen to scroll to the bottom *after* re-rendering.
-      setTimeout(() => {
-        const log = $('#log');
-        log.animate({ scrollTop: log.prop("scrollHeight") }, 'fast');
-      }, 100);
+    emitter.on('render', callback => {
+      // This is a dirty hack to get the callback to call *after* re-rendering.
+      if (callback && $.isFunction(callback)){
+        setTimeout(() => {
+          callback();
+        }, 50);
+      }
+
     });
     emitter.on('change view', newView => {
       state.currentView = newView;
@@ -61,7 +63,10 @@ app.use((state, emitter) => {
     state.socket.on('roll die', rollData => {
       state.dieRolls.push(rollData);
 
-      emitter.emit('render');
+      emitter.emit('render', () => {
+        const log = $('#log');
+        log.animate({ scrollTop: log.prop("scrollHeight") }, 'fast');
+      });
     });
 
     state.socket.on('console.log', value => {
