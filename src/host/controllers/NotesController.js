@@ -22,25 +22,7 @@ export class NotesController extends ViewController {
     this.sortNotes();
 
     const { notes, currentPage } = this.state;
-    const numberOfNotes = notes.length;
-
-    // If there are fewer notes than the number of notes per page, just return the whole array.
-    if (numberOfNotes <= this.notesPerPage) {
-      return notes.slice();
-    }
-
-    const firstNoteIndex = currentPage * this.notesPerPage;
-    const sliceAtIndex = (numberOfNotes % this.notesPerPage === 0)
-      ? firstNoteIndex + this.notesPerPage
-      : firstNoteIndex + (numberOfNotes % this.notesPerPage);
-
-    // sliceAtIndex gives the index of the first note you want to exclude.
-    if (notes[sliceAtIndex]) {
-      return notes.slice(firstNoteIndex, sliceAtIndex);
-    } else {
-      // If the first index after the target index doesn't exist, just take until the end of the array.
-      return notes.slice(firstNoteIndex);
-    }
+    return notes.slice(currentPage * this.notesPerPage, (currentPage + 1) * this.notesPerPage);
   }
 
   get currentNote () {

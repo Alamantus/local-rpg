@@ -6,10 +6,10 @@ import { NotesController } from '../controllers/NotesController';
 export default (state, emit) => {
   const controller = new NotesController(state);
 
-  const previousPage = controller.state.currentPage > 0 ? controller.state.currentPage : 1;
-  const nextPage = controller.state.currentPage + 2 < controller.numberOfPages
-    ? controller.state.currentPage + 2
-    : controller.numberOfPages;
+  const previousPage = controller.state.currentPage - 1 >= 0 ? controller.state.currentPage - 1 : 0;
+  const nextPage = controller.state.currentPage + 1 < controller.numberOfPages - 1
+    ? controller.state.currentPage + 1
+    : controller.numberOfPages - 1;
 
   const view = html`<div class="columns">
     <div class="column is-one-quarter">
