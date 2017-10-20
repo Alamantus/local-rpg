@@ -83,6 +83,11 @@ export default (state, emit) => {
               <textarea class="textarea" onchange=${ event => controller.updateNote(emit, event) }>${ controller.currentNote.content }</textarea>
             </div>
           </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <a onclick=${ () => controller.close(emit) }><button class="button is-text">Cancel</button></a>
+            </div>
+          </div>
         </div>`
         : html`<div>
           <a class="button is-success" onclick=${ () => {
