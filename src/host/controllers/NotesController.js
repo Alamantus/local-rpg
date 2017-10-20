@@ -28,7 +28,7 @@ export class NotesController extends ViewController {
     if (numberOfNotes <= this.notesPerPage) {
       return notes.slice();
     }
-    
+
     const firstNoteIndex = currentPage * this.notesPerPage;
     const sliceAtIndex = (numberOfNotes % this.notesPerPage === 0)
       ? firstNoteIndex + this.notesPerPage
@@ -49,8 +49,8 @@ export class NotesController extends ViewController {
 
   sortNotes () {
     this.state.notes.sort((a, b) => {
-      if (a.updated == b.updated) return 0;
-      return (a.updated > b.updated) ? 1 : -1;
+      if (a.created == b.created) return 0;
+      return (a.created > b.created) ? 1 : -1;
     });
 
     // Set the notes' indices for easy access.

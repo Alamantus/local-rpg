@@ -85,7 +85,7 @@ export default (state, emit) => {
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <a onclick=${ () => controller.close(emit) }><button class="button is-text">Cancel</button></a>
+              <a onclick=${ () => controller.close(emit) }><button class="button is-text">Close</button></a>
             </div>
           </div>
         </div>`
