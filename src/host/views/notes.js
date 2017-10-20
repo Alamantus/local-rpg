@@ -6,10 +6,10 @@ import { NotesController } from '../controllers/NotesController';
 export default (state, emit) => {
   const controller = new NotesController(state);
 
-  const previousPage = controller.state.currentPage - 1 >= 0 ? controller.state.currentPage - 1 : 0;
-  const nextPage = controller.state.currentPage + 1 < controller.numberOfPages - 1
-    ? controller.state.currentPage + 1
-    : controller.numberOfPages - 1;
+  const hasPreviousPage = controller.state.currentPage - 1 >= 0;
+  const previousPage = hasPreviousPage >= 0 ? controller.state.currentPage - 1 : 0;
+  const hasNextPage = controller.state.currentPage + 1 < controller.numberOfPages;
+  const nextPage = hasNextPage ? controller.state.currentPage + 1 : controller.numberOfPages - 1;
 
   const view = html`<div class="columns">
     <div class="column is-one-quarter">
@@ -38,13 +38,15 @@ export default (state, emit) => {
       <nav class="pagination is-small" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
           <li>
-            <a class="pagination-link" aria-label="Goto page 1"
+            <a class="pagination-link" disabled=${ controller.state.currentPage === 0 }
+              aria-label="Goto page 1"
               onclick=${ () => controller.goToPage(emit, 0) }>
               First
             </a>
           </li>
           <li>
-            <a class="pagination-link" aria-label=${ 'Goto page ' + previousPage.toString() }
+            <a class="pagination-link" disabled=${ !hasPreviousPage }
+              aria-label=${ 'Goto page ' + previousPage.toString() }
               onclick=${ () => controller.goToPage(emit, previousPage) }>
               Prev
             </a>
@@ -53,14 +55,16 @@ export default (state, emit) => {
             <span class="pagination-ellipsis">${ controller.state.currentPage + 1 } of ${ controller.numberOfPages }</span>
           </li>
           <li>
-            <a class="pagination-link" aria-label=${ 'Goto page ' + nextPage.toString() }
+            <a class="pagination-link" disabled=${ !hasNextPage }
+              aria-label=${ 'Goto page ' + nextPage.toString() }
               onclick=${ () => controller.goToPage(emit, nextPage) }>
               Next
             </a>
           </li>
           <li>
-            <a class="pagination-link" aria-label=${ 'Goto page ' + controller.numberOfPages.toString() }
-              onclick=${ () => controller.goToPage(emit, controller.numberOfPages) }>
+            <a class="pagination-link" disabled=${ !hasNextPage }
+              aria-label=${ 'Goto page ' + controller.numberOfPages.toString() }
+              onclick=${ () => controller.goToPage(emit, controller.numberOfPages - 1) }>
               Last
             </a>
           </li>
