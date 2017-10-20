@@ -63,7 +63,7 @@ export default (state, emit) => {
 
             <div class="field">
               <div class="control">
-                <a class="button is-success" disabled=${ !controller.state.roll ? true : null } onclick=${ controller.show }>
+                <a class="button is-success" disabled=${ !controller.state.roll ? true : false } onclick=${ controller.show }>
                   Show Roll
                 </a>
               </div>
