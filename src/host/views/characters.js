@@ -1,13 +1,9 @@
 import html from 'choo/html';
 
+// import { CharactersController } from ‘../controllers/CharactersController’;
+
 export default (state, emit) => {
-  // Manage this view's state
-  // if (!state.viewStates.hasOwnProperty('test')) {
-  //   state.viewStates['test'] = {
-  //     chatInput: '',
-  //   };
-  // }
-  // const viewState = state.viewStates['test'];
+  // const controller = new CharactersController(state);
 
   return html`<div>
   <div class="columns is-multiline">
