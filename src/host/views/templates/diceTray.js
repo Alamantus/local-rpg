@@ -60,7 +60,7 @@ export default (state, emit) => {
                 </div>`
               : html`<div class="content"></div>`
             }
-            
+
             <div class="field">
               <div class="control">
                 <a class="button is-success" disabled=${ !controller.state.roll ? true : null } onclick=${ controller.show }>

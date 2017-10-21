@@ -5,10 +5,8 @@ import diceTray from './views/templates/diceTray';
 import tableView from './views/table';
 import chatView from './views/chat';
 import charactersView from './views/characters';
-import charactersCreation from './views/characterCreation';
-
-
-
+import characterCreation from './views/characterCreation';
+import notesView from './views/notes';
 
 export default (state, emit) => {
   // In viewManager all we are doing is checking the app's state
@@ -20,16 +18,25 @@ export default (state, emit) => {
       htmlContent = tableView(state, emit);
       break;
     }
-    case 'chat': {
+    case 'players': {
       htmlContent = chatView(state, emit);
       break;
     }
-    case 'characters': {
+    case 'sheets': {
       htmlContent = charactersView(state, emit);
       break;
     }
     case 'character creation': {
-      htmlContent = charactersCreation(state, emit);
+      htmlContent = characterCreation(state, emit);
+      break;
+    }
+    case 'dice': {
+      // Host-only view
+      htmlContent = charactersView(state, emit);
+      break;
+    }
+    case 'notes': {
+      htmlContent = notesView(state, emit);
       break;
     }
   }
@@ -42,15 +49,25 @@ export default (state, emit) => {
             emit('change view', 'main');
           }}>Table</a>
         </li>
-        <li class=${ state.currentView === 'chat' ? 'is-active' : null }>
+        <li class=${ state.currentView === 'players' ? 'is-active' : null }>
           <a onclick=${() => {
-            emit('change view', 'chat');
-          }}>Chat Screen</a>
+            emit('change view', 'players');
+          }}>Players</a>
         </li>
-        <li class=${ state.currentView === 'characters' ? 'is-active' : null }>
+        <li class=${ state.currentView === 'sheets' ? 'is-active' : null }>
           <a onclick=${() => {
-            emit('change view', 'characters');
-          }}>Characters</a>
+            emit('change view', 'sheets');
+          }}>Sheets</a>
+        </li>
+        <li class=${ state.currentView === 'dice' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'dice');
+          }}>Dice</a>
+        </li>
+        <li class=${ state.currentView === 'notes' ? 'is-active' : null }>
+          <a onclick=${() => {
+            emit('change view', 'notes');
+          }}>Notes</a>
         </li>
       </ul>
     </nav>
