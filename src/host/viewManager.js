@@ -6,6 +6,7 @@ import tableView from './views/table';
 import chatView from './views/chat';
 import charactersView from './views/characters';
 import characterCreation from './views/characterCreation';
+import diceView from './views/dice';
 import notesView from './views/notes';
 
 export default (state, emit) => {
@@ -32,7 +33,7 @@ export default (state, emit) => {
     }
     case 'dice': {
       // Host-only view
-      htmlContent = charactersView(state, emit);
+      htmlContent = diceView(state, emit);
       break;
     }
     case 'notes': {
