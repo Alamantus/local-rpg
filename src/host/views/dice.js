@@ -1,9 +1,16 @@
+/*
+  Eventually this view will look a lot like notes.js instead, and
+  characters.js will probably also be modified to use the list view as well.
+  For now, I'm just trying to get _something_ up to master. :)
+  Delete this note once the view gets updated, please.
+  Thanks! -Robbie
+*/
 import html from 'choo/html';
 
-// import { CharactersController } from ‘../controllers/CharactersController’;
+// import { DiceController } from ‘../controllers/DiceController’;
 
 export default (state, emit) => {
-  // const controller = new CharactersController(state);
+  // const controller = new DiceController(state);
 
   return html`<div>
   <div class="columns is-multiline">
