@@ -1,5 +1,26 @@
-.tabs {
+@import '../../../node_modules/bulma/sass/components/tabs';
+@import '../../../node_modules/bulma/sass/layout/section';
+
+.main-tabs {
+  @extend .tabs;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+
   &:not(:last-child) {
     margin-bottom: 0.5rem;
   }
+}
+
+.main-section {
+  @extend .section;
+
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
