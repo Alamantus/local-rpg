@@ -74,9 +74,7 @@ export default (state, emit) => {
     </nav>
 
     <section class="section" style="height: 90%">
-      <div class="container" style="height: 100%">
-        ${ htmlContent }
-      </div>
+      ${ htmlContent }
     </section>
 
     ${ diceTray(state, emit) }
