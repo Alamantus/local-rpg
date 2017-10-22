@@ -3,7 +3,7 @@ import html from 'choo/html';
 import diceTray from './views/templates/diceTray';
 
 import tableView from './views/table';
-import chatView from './views/chat';
+import playersView from './views/players';
 import charactersView from './views/characters';
 import characterCreation from './views/characterCreation';
 import diceView from './views/dice';
@@ -20,7 +20,7 @@ export default (state, emit) => {
       break;
     }
     case 'players': {
-      htmlContent = chatView(state, emit);
+      htmlContent = playersView(state, emit);
       break;
     }
     case 'sheets': {

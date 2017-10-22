@@ -1,16 +1,16 @@
 import { ViewController } from './ViewController';
 
-export class ChatController extends ViewController {
+export class PlayersController extends ViewController {
   constructor (state) {
     // Super passes state, view name, and default state to ViewController,
     // which stores state in this.appState and the view controller's state to this.state
-    super(state, 'chat', {
+    super(state, 'players', {
       chatInput: '',
     });
 
     // If using controller methods in an input's onchange or onclick instance like this one's is,
     // either bind the class's 'this' instance to the method first...
-    this.input = this.input.bind(this); // Allows this usage: `onchange=${controller.input}` in `src/host/views/chat.js`
+    this.input = this.input.bind(this); // Allows this usage: `onchange=${controller.input}` in `src/host/views/players.js`
     // or use `onclick=${() => controller.submit()}` to maintain the 'this' of the class instead.
   }
 

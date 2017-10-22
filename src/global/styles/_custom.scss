@@ -1,6 +1,14 @@
 @import '../../../node_modules/bulma/sass/components/tabs';
 @import '../../../node_modules/bulma/sass/layout/section';
 
+html, body {
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .main-tabs {
   @extend .tabs;
 

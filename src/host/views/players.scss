@@ -1,27 +1,15 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html, body {
-  font: 13px Helvetica, Arial;
-  height: 100%
-}
-a {
-  cursor: pointer;
-}
 #chatForm {
   background: #000;
   padding: 3px;
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 73%;
 }
 #chatForm input {
   border: 0;
   padding: 10px;
   width: 80%;
-  margin-right: .5%;
+  margin-right: 0.5%;
 }
 #chatForm button {
   width: 19%;
