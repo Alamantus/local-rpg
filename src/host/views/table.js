@@ -7,7 +7,7 @@ import { TableController } from '../controllers/TableController';
 export default (state, emit) => {
   const controller = new TableController(state);
 
-  return html`<div class="tile is-ancestor" style="height: 100%;">
+  return html`<div class="tile--table-view">
     <div class="tile is-parent is-9">
       <article class="tile is-child box">
         <h2 class="title">Asset Window</h2>
