@@ -8,7 +8,7 @@ import { PlayersController } from '../controllers/PlayersController';
 export default (state, emit) => {
   const controller = new PlayersController(state);
 
-  const view = html`<div class="columns">
+  const view = html`<div class="columns--players-view">
     <div class="column is-one-quarter">
       <nav class="panel">
         <h4 class="panel-heading">
@@ -33,7 +33,7 @@ export default (state, emit) => {
         </a>
       </nav>
     </div>
-    <div class="column is-three-quarters">
+    <div class="chat-column is-three-quarters">
       <ul id="messages">
       ${
         state.chats.main.map(value => {
