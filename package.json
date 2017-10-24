@@ -4,7 +4,7 @@
   "description": "A platform for serving role playing resources over a local network.",
   "contributors": [
     "Robbie Antenesse <dev@alamantus.com> (http://robbie.antenesse.net)",
-    "Ryan Stong <rvanstong@gmail.com> (https://descartez.github.io/)",
+    "Ryan Stong <rvanstong@gmail.com> (https://descartez.github.io/)"
   ],
   "repository": {
     "type" : "git",
