@@ -2,8 +2,6 @@
 import 'whatwg-fetch'
 import 'babel-polyfill';
 
-import '../global/style.css';
-
 // import 'jquery-ui/themes/base/core.css';
 // import 'jquery-ui/themes/base/menu.css';
 // import 'jquery-ui/themes/base/autocomplete.css';
