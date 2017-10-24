@@ -16,6 +16,10 @@ Here are some important resources:
 
 Test suites are cool, but they often hinder a small team. If our contributor pool grows large enough, we might need to start adding them, at which point any help will be much appreciated. Until then, just make sure your contributions work properly before submitting them.
 
+## Proposing Designs
+
+To propose new or different designs, either create a new issue or talk about it in the [Design room on Gitter](https://gitter.im/local-rpg/design). Create clear images or layouts and share them so we can see what you have in mind and discuss them accordingly. Once the design has a general consensus or is approved by one of the maintainers, either you or someone else can start working on implementing the design changes.
+
 ## Submitting changes
 
 *Note:* Before ever making any changes, please be sure you make a pull from the master repo.
