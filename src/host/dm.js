@@ -36,12 +36,14 @@ app.use((state, emitter) => {
   // Listeners
   emitter.on('DOMContentLoaded', () => {
     // Emitter listeners
-    emitter.on('render', () => {
-      // This is a dirty hack to get the rolls screen to scroll to the bottom *after* re-rendering.
-      setTimeout(() => {
-        const log = $('#log');
-        log.animate({ scrollTop: log.prop("scrollHeight") }, 'fast');
-      }, 100);
+    emitter.on('render', callback => {
+      // This is a dirty hack to get the callback to call *after* re-rendering.
+      if (callback && $.isFunction(callback)){
+        setTimeout(() => {
+          callback();
+        }, 50);
+      }
+
     });
     emitter.on('set game data', gameData => {
       state.gameName = gameData.gameName;
@@ -87,35 +89,3 @@ app.use((state, emitter) => {
 app.route('/', viewManager);
 
 app.mount('body');
-
-// $(() => {
-//
-//   $('form').submit(() => {
-//     socket.emit('chat message', $('#m').val());
-//     $('#m').val('');
-//     return false;
-//   });
-//
-//   socket.on('chat message', msg => {
-//
-//     $('#messages').append($('<li>').text(msg));
-//   });
-//
-//   socket.on('console.log', value => {
-//     console.log(value);
-//   });
-//
-//   // socket.on('moved piece', pieceData => {
-//   //   $(`#${pieceData.id}`).css({ top: pieceData.position.top, left: pieceData.position.left });
-//   // });
-//
-//   const piece = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', {
-//     socket: socket,
-//   });
-//
-//   const piece2 = new MovablePiece('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', {
-//     socket: socket,
-//     top: 3,
-//     left: 400,
-//   });
-// });

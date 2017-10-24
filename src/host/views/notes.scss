@@ -1,0 +1,25 @@
+@import '../../global/styles/variables';
+@import '../../../node_modules/bulma/sass/utilities/initial-variables';
+@import '../../../node_modules/bulma/sass/utilities/derived-variables';
+@import '../../../node_modules/bulma/sass/utilities/mixins';
+@import '../../../node_modules/bulma/sass/grid/columns';
+@import '../../../node_modules/bulma/sass/elements/tag';
+
+.columns--notes-view {
+  @extend .columns;
+
+  height: 100%;
+
+  .note-entry-column {
+    @extend .column;
+
+    height: 100%;
+  }
+}
+
+.note-date {
+  @extend .tag;
+
+  margin-left: 0.5rem;
+  margin-right: 0
+}

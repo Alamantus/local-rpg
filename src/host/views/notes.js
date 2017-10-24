@@ -1,17 +1,19 @@
 import html from 'choo/html';
 import moment from 'moment';
 
+import './notes.scss';
+
 import { NotesController } from '../controllers/NotesController';
 
 export default (state, emit) => {
   const controller = new NotesController(state);
 
-  const previousPage = controller.state.currentPage > 0 ? controller.state.currentPage : 1;
-  const nextPage = controller.state.currentPage + 2 < controller.numberOfPages
-    ? controller.state.currentPage + 2
-    : controller.numberOfPages;
+  const hasPreviousPage = controller.state.currentPage - 1 >= 0;
+  const previousPage = hasPreviousPage >= 0 ? controller.state.currentPage - 1 : 0;
+  const hasNextPage = controller.state.currentPage + 1 < controller.numberOfPages;
+  const nextPage = hasNextPage ? controller.state.currentPage + 1 : controller.numberOfPages - 1;
 
-  const view = html`<div class="columns">
+  const view = html`<div class="columns--notes-view">
     <div class="column is-one-quarter">
       <nav class="panel">
         <h4 class="panel-heading">
@@ -27,10 +29,15 @@ export default (state, emit) => {
         </div>
         ${
           controller.currentPageNotes.map(note => {
-            const noteClass = `panel-block${ controller.state.displayedNote === note.index ? ' is-active' : '' }`;
+            const isCurrent = note.index === controller.state.displayedNote;
+            const noteClass = `panel-block${ isCurrent ? ' is-active' : '' }`;
             return html`<a class=${ noteClass } onclick=${ () => controller.open(emit, note.index) }>
-              ${ note.name }
-              <span class="tag">${ moment(note.updated).calendar() }</span>
+              <span style=${ isCurrent ? 'font-weight: bold;' : false }>
+                ${ note.name }
+              </span>
+              <span class="note-date">
+                ${ moment(note.updated).calendar() }
+              </span>
             </a>`;
           })
         }
@@ -38,13 +45,15 @@ export default (state, emit) => {
       <nav class="pagination is-small" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
           <li>
-            <a class="pagination-link" aria-label="Goto page 1"
+            <a class="pagination-link" disabled=${ controller.state.currentPage === 0 }
+              aria-label="Goto page 1"
               onclick=${ () => controller.goToPage(emit, 0) }>
               First
             </a>
           </li>
           <li>
-            <a class="pagination-link" aria-label=${ 'Goto page ' + previousPage.toString() }
+            <a class="pagination-link" disabled=${ !hasPreviousPage }
+              aria-label=${ 'Goto page ' + previousPage.toString() }
               onclick=${ () => controller.goToPage(emit, previousPage) }>
               Prev
             </a>
@@ -53,14 +62,16 @@ export default (state, emit) => {
             <span class="pagination-ellipsis">${ controller.state.currentPage + 1 } of ${ controller.numberOfPages }</span>
           </li>
           <li>
-            <a class="pagination-link" aria-label=${ 'Goto page ' + nextPage.toString() }
+            <a class="pagination-link" disabled=${ !hasNextPage }
+              aria-label=${ 'Goto page ' + nextPage.toString() }
               onclick=${ () => controller.goToPage(emit, nextPage) }>
               Next
             </a>
           </li>
           <li>
-            <a class="pagination-link" aria-label=${ 'Goto page ' + controller.numberOfPages.toString() }
-              onclick=${ () => controller.goToPage(emit, controller.numberOfPages) }>
+            <a class="pagination-link" disabled=${ !hasNextPage }
+              aria-label=${ 'Goto page ' + controller.numberOfPages.toString() }
+              onclick=${ () => controller.goToPage(emit, controller.numberOfPages - 1) }>
               Last
             </a>
           </li>
@@ -68,7 +79,7 @@ export default (state, emit) => {
       </nav>
     </div>
 
-    <div class="column is-three-quarters">
+    <div class="note-entry-column is-three-quarters">
       ${
         controller.state.displayedNote !== null
         ? html`<div>
@@ -80,7 +91,20 @@ export default (state, emit) => {
           </div>
           <div class="field">
             <div class="control">
-              <textarea class="textarea" onchange=${ event => controller.updateNote(emit, event) }>${ controller.currentNote.content }</textarea>
+              <textarea id="displayedNote" class="textarea" onchange=${ event => controller.updateNote(emit, event) }>
+              <!-- Value populated on certain renders. See controller. -->
+              </textarea>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-text" onclick=${ () => controller.close(emit) }>
+                Close
+              </button>
+              <button class="button is-small is-danger is-pulled-right"
+                onclick=${ () => controller.delete(emit, controller.state.displayedNote) }>
+                Delete
+              </button>
             </div>
           </div>
         </div>`

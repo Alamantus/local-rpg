@@ -19,41 +19,25 @@ export class NotesController extends ViewController {
   }
 
   get currentPageNotes () {
-    this.sortNotes();
-
     const { notes, currentPage } = this.state;
-    const numberOfNotes = notes.length;
-
-    // If there are fewer notes than the number of notes per page, just return the whole array.
-    if (numberOfNotes <= this.notesPerPage) {
-      return notes.slice();
-    }
-    
-    const firstNoteIndex = currentPage * this.notesPerPage;
-    const sliceAtIndex = (numberOfNotes % this.notesPerPage === 0)
-      ? firstNoteIndex + this.notesPerPage
-      : firstNoteIndex + (numberOfNotes % this.notesPerPage);
-
-    // sliceAtIndex gives the index of the first note you want to exclude.
-    if (notes[sliceAtIndex]) {
-      return notes.slice(firstNoteIndex, sliceAtIndex);
-    } else {
-      // If the first index after the target index doesn't exist, just take until the end of the array.
-      return notes.slice(firstNoteIndex);
-    }
+    return notes.slice(currentPage * this.notesPerPage, (currentPage + 1) * this.notesPerPage);
   }
 
   get currentNote () {
     return this.state.notes[this.state.displayedNote];
   }
 
-  sortNotes () {
+  sortNotes (byField, ascending = true) {
     this.state.notes.sort((a, b) => {
-      if (a.updated == b.updated) return 0;
-      return (a.updated > b.updated) ? 1 : -1;
+      if (a[byField] == b[byField]) return 0;
+      const sort = (a[byField] > b[byField]) ? 1 : -1;
+      return ascending ? sort : sort * -1;
     });
 
-    // Set the notes' indices for easy access.
+    this.updateNoteIndices();
+  }
+
+  updateNoteIndices () {
     this.state.notes.forEach((note, index) => {
       note.index = index;
     });
@@ -71,17 +55,26 @@ export class NotesController extends ViewController {
       updated: Date.now(),
       content: '',
     };
-    this.state.notes.push(newNote);
-
-    this.sortNotes();
+    this.state.notes.unshift(newNote);
+    this.updateNoteIndices();
 
     // Return the newly created note's index.
-    return this.state.notes.length - 1;
+    return 0;
+  }
+
+  delete (emit, noteIndex) {
+    this.state.notes.splice(noteIndex, 1);
+    this.updateNoteIndices();
+    this.close(emit);
+  }
+
+  populateTextarea () {
+    $('#displayedNote').val(this.currentNote.content);
   }
 
   open (emit, noteIndex) {
     this.state.displayedNote = parseInt(noteIndex);
-    emit('render');
+    emit('render', () => this.populateTextarea());
   }
 
   close (emit) {
@@ -99,8 +92,7 @@ export class NotesController extends ViewController {
     this.currentNote.name = value;
     this.currentNote.updated = Date.now();
 
-    this.sortNotes();
-    emit('render');
+    emit('render', () => this.populateTextarea());
   }
 
   updateNote (emit, event) {
@@ -112,8 +104,5 @@ export class NotesController extends ViewController {
     }
     this.currentNote.content = value;
     this.currentNote.updated = Date.now();
-
-    this.sortNotes();
-    emit('render');
   }
 }
