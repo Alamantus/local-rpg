@@ -1,12 +1,13 @@
 import html from 'choo/html';
 
+import './characters.scss';
+
 // import { CharactersController } from ‘../controllers/CharactersController’;
 
 export default (state, emit) => {
   // const controller = new CharactersController(state);
 
-  return html`<div>
-  <div class="columns is-multiline">
+  return html`<div class="columns--characters-view">
     <div class="column is-one-quarter">
       <div class="card">
         <div class="card-content">
@@ -57,7 +58,5 @@ export default (state, emit) => {
         </div>
       </div>
     </div>
-  </div>
-
   </div>`;
 }
