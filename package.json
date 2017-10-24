@@ -2,6 +2,19 @@
   "name": "local-rpg",
   "version": "0.0.1",
   "description": "A platform for serving role playing resources over a local network.",
+  "contributors": [
+    "Robbie Antenesse <dev@alamantus.com> (http://robbie.antenesse.net)",
+    "Ryan Stong <rvanstong@gmail.com> (https://descartez.github.io/)",
+  ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Alamantus/local-rpg.git"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url" : "https://github.com/Alamantus/local-rpg/issues",
+    "email" : "dev@alamantus.com"
+  },
   "main": "./src/host/app.js",
   "scripts": {
     "dev": "concurrently --kill-others \"npm run watch\" \"npm run start:app\"",
@@ -19,7 +32,6 @@
     "watch:host": "webpack --config webpack.config.host.js --watch --progress --colors",
     "postinstall": "electron-builder install-app-deps"
   },
-  "author": "Robbie Antenesse <dev@alamantus.com>",
   "build": {
     "appId": "com.electron.local-rpg",
     "mac": {
@@ -33,7 +45,6 @@
     },
     "asarUnpack": "./build/client/*"
   },
-  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

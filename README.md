@@ -1,5 +1,7 @@
 # Local RPG Platform
 
+[![Read our Contribution Guidelines](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](./CONTRIBUTION.md) [![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/Alamantus/local-rpg/issues) [![Join the chat at https://gitter.im/local-rpg/Lobby](https://badges.gitter.im/local-rpg/Lobby.svg)](https://gitter.im/local-rpg/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [<img height='20' style='border:0px;height:20px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />](https://ko-fi.com/alamantus)
+
 ## Goal
 To have a locally hosted pen and paper RPG experience using laptops and various other devices connected via wifi. The Dungeon/Game Master will use a laptop or desktop computer to manage and display character and monster info, maps, and various other assets. All players can roll dice (and the DM/GM can create custom dice), and display their rolls.
 
@@ -23,13 +25,27 @@ To have a locally hosted pen and paper RPG experience using laptops and various 
 - "Whisper" chat
   - private chat system between players and DM
 
+## Usage
+
+_Every time you pull from the repo, be sure to re-run the install step in case something got added to the project._
 
 ### Install
 
-`npm install` or `yarn`
+`npm install` or `yarn` will install all the required `node_modules` and allow you to build and run the app.
 
 ### Build and Run
 
-`npm run start` will build the host and client and start running the host Electron app.
+`npm run start` will build the host and client and start running the host Electron app.  
+`npm run dev` will start webpack watchers and the host Electron app, which will refresh on every change to `build` folder.
 
 Access client by going to localhost (or host computer's local IP address on network) at port 3000
+
+## Contribution
+
+Please see the [`CONTRIBUTION.md`](./CONTRIBUTION.md) for instructions on how to contribute to this project.
+
+Any interactions or contributions to the project must follow the [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+## License
+
+We use the [GNU GPLv3](./LICENSE.txt) license for this project.
