@@ -4,7 +4,7 @@ import diceTray from './views/templates/diceTray';
 
 import tableView from './views/table';
 import playersView from './views/players';
-import charactersView from './views/characters';
+import sheetsView from './views/sheets';
 import characterCreation from './views/characterCreation';
 import diceView from './views/dice';
 import notesView from './views/notes';
@@ -24,7 +24,7 @@ export default (state, emit) => {
       break;
     }
     case 'sheets': {
-      htmlContent = charactersView(state, emit);
+      htmlContent = sheetsView(state, emit);
       break;
     }
     case 'character creation': {

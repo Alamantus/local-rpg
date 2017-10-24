@@ -1,13 +1,13 @@
 import html from 'choo/html';
 
-import './characters.scss';
+import './sheets.scss';
 
-// import { CharactersController } from ‘../controllers/CharactersController’;
+// import { SheetsController } from ‘../controllers/SheetsController’;
 
 export default (state, emit) => {
-  // const controller = new CharactersController(state);
+  // const controller = new SheetsController(state);
 
-  return html`<div class="columns--characters-view">
+  return html`<div class="columns--sheets-view">
     <div class="column is-one-quarter">
       <div class="card">
         <div class="card-content">
