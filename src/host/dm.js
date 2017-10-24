@@ -19,11 +19,12 @@ import { MovablePiece } from '../global/display/MovablePiece';
 
 import viewManager from './viewManager';
 
+const electronApp = window.require('electron').remote.app;
 const app = choo();
 
 // App state and emitters
 app.use((state, emitter) => {
-  state.socket = io('http://localhost:3000');
+  state.server = electronApp.app.server;
   state.currentView = 'main';
   state.viewStates = {};
   state.logs = [];
@@ -42,6 +43,33 @@ app.use((state, emitter) => {
         log.animate({ scrollTop: log.prop("scrollHeight") }, 'fast');
       }, 100);
     });
+    emitter.on('set game data', gameData => {
+      state.gameName = gameData.gameName;
+      state.port = gameData.port;
+
+      state.server.start(state.port, () => {
+        console.log(`Connect on ${state.server.ips[(state.server.ips.length - 1)]}:${state.port}`);
+        state.socket = io('http://localhost:' + state.port);
+
+        // Socket listeners
+        state.socket.on('chat message', msg => {
+          state.chats.main.push(msg);
+
+          emitter.emit('render');
+        });
+        state.socket.on('roll die', rollData => {
+          state.dieRolls.push(rollData);
+
+          emitter.emit('render');
+        });
+
+        state.socket.on('console.log', value => {
+          console.log(value);
+        });
+
+        emitter.emit('render');
+      });
+    });
     emitter.on('change view', newView => {
       state.currentView = newView;
       emitter.emit('render'); // This is how you update the display after changing state!
@@ -49,22 +77,6 @@ app.use((state, emitter) => {
     emitter.on('roll die', newView => {
       state.currentView = newView;
       emitter.emit('render'); // This is how you update the display after changing state!
-    });
-
-    // Socket listeners
-    state.socket.on('chat message', msg => {
-      state.chats.main.push(msg);
-
-      emitter.emit('render');
-    });
-    state.socket.on('roll die', rollData => {
-      state.dieRolls.push(rollData);
-
-      emitter.emit('render');
-    });
-
-    state.socket.on('console.log', value => {
-      console.log(value);
     });
   });
 });

@@ -16,10 +16,6 @@ class App {
   start () {
     app.on('ready', () => {
       this.createWindow();
-      
-      this.server.start(() => {
-        console.log(`Connect on ${this.server.ips[(this.server.ips.length - 1)]}:3000`);
-      });
     });
 
     // Quit when all windows are closed.

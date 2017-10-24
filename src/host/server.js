@@ -72,9 +72,9 @@ class Server {
     this.io.emit(triggerString, value);
   }
 
-  start (onStart = () => {}) {
+  start (port, onStart = () => {}) {
     if (!this.hasStarted) {
-      this.http.listen(3000, () => {
+      this.http.listen(parseInt(port), () => {
         this.hasStarted = true;
         onStart();
       });
