@@ -2,8 +2,8 @@
   "name": "local-rpg",
   "version": "0.0.1",
   "description": "A platform for serving role playing resources over a local network.",
-  "author": "Robbie Antenesse <dev@alamantus.com> (http://robbie.antenesse.net)",
   "contributors": [
+    "Robbie Antenesse <dev@alamantus.com> (http://robbie.antenesse.net)",
     "Ryan Stong <rvanstong@gmail.com> (https://descartez.github.io/)"
   ],
   "repository": {
