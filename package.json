@@ -7,13 +7,13 @@
     "Ryan Stong <rvanstong@gmail.com> (https://descartez.github.io/)"
   ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Alamantus/local-rpg.git"
+    "type": "git",
+    "url": "https://github.com/Alamantus/local-rpg.git"
   },
   "license": "GPL-3.0",
   "bugs": {
-    "url" : "https://github.com/Alamantus/local-rpg/issues",
-    "email" : "dev@alamantus.com"
+    "url": "https://github.com/Alamantus/local-rpg/issues",
+    "email": "dev@alamantus.com"
   },
   "main": "./src/host/app.js",
   "scripts": {
@@ -51,8 +51,8 @@
     "babel-preset-env": "^1.6.1",
     "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
-    "electron": "^1.7.9",
-    "electron-builder": "^19.36.0",
+    "electron": "^1.7.11",
+    "electron-builder": "^19.55.2",
     "electron-reload": "^1.2.2",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
