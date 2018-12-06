@@ -1,4 +1,5 @@
 import html from 'choo/html';
+import moment from 'moment';
 
 import './table.scss';
 
@@ -25,6 +26,7 @@ export default (state, emit) => {
           state.dieRolls.map(rollData => {
             return html`<div class="box content is-marginless">
               <p>
+                <em>${ moment(rollData.time).fromNow() }</em><br />
                 Rolled ${ rollData.rolls.length } ${ rollData.dieName }<br />
                 ${
                   (rollData.rolls.length > 1)

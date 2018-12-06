@@ -62,7 +62,10 @@ app.use((state, emitter) => {
         state.socket.on('roll die', rollData => {
           state.dieRolls.push(rollData);
 
-          emitter.emit('render');
+          emitter.emit('render', () => {
+            const log = document.getElementById('log');
+            log.scrollTop = log.scrollHeight;
+          });
         });
 
         state.socket.on('console.log', value => {
@@ -74,11 +77,14 @@ app.use((state, emitter) => {
     });
     emitter.on('change view', newView => {
       state.currentView = newView;
-      emitter.emit('render'); // This is how you update the display after changing state!
+      emitter.emit('render', () => {
+        const log = document.getElementById('log');
+        log.scrollTop = log.scrollHeight;
+      });
     });
     emitter.on('roll die', newView => {
       state.currentView = newView;
-      emitter.emit('render'); // This is how you update the display after changing state!
+      emitter.emit('render');
     });
   });
 });

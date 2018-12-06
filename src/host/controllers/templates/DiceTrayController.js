@@ -64,12 +64,13 @@ export class DiceTrayController extends ViewController {
       return $.isNumeric(face);
     });
     const dieName = (isNumericDie) ? `d${ faces.length }` : faces.join('/');
-
+    
     const rollData = {
       dieName,
       faces,
       rolls,
       total,
+      time: Date.now(),
     };
     this.state.roll = rollData;
     emit('render');
