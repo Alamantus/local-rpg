@@ -2,13 +2,13 @@ import html from 'choo/html';
 
 export default (state, emit) => {
   const startServer = () => {
-    const gameName = $('#gameName').val(),
+    const name = $('#gameName').val(),
       port = $('#port').val();
 
     $('#startButton').addClass('is-loading');
 
     emit('set game data', {
-      gameName,
+      name,
       port,
     });
   }

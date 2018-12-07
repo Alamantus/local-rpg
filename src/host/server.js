@@ -13,6 +13,9 @@ class Server {
 
     this.hasStarted = false;
 
+    this.name = null;
+    this.port = null;
+
     this.setupExpress();
     this.setupSocketIO();
   }
@@ -72,9 +75,11 @@ class Server {
     this.io.emit(triggerString, value);
   }
 
-  start (port, onStart = () => {}) {
+  start ({port, name}, onStart = () => {}) {
     if (!this.hasStarted) {
       this.http.listen(parseInt(port), () => {
+        this.port = port;
+        this.name = name;
         this.hasStarted = true;
         onStart();
       });

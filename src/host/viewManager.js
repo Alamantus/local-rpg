@@ -52,6 +52,7 @@ export default (state, emit) => {
 
     view = html`<body>
       <nav class="main-tabs">
+        <h1 class="title is-inline">${state.server.name}</h1>
         <ul>
           <li class=${ state.currentView === 'main' ? 'is-active' : null }>
             <a onclick=${() => {

@@ -25,6 +25,8 @@ const app = choo();
 // App state and emitters
 app.use((state, emitter) => {
   state.server = electronApp.app.server;
+  state.socket = null;
+  state.connected = false;
   state.currentView = 'main';
   state.viewStates = {};
   state.logs = [];
@@ -46,34 +48,35 @@ app.use((state, emitter) => {
 
     });
     emitter.on('set game data', gameData => {
-      state.gameName = gameData.gameName;
-      state.port = gameData.port;
+      state.server.start(gameData, () => {
+        emitter.emit('connect to server');
+      });
+    });
+    emitter.on('connect to server', () => {
+      console.log(`Connect on ${state.server.ips[(state.server.ips.length - 1)]}:${state.server.port}`);
+      state.socket = io('http://localhost:' + state.server.port);
 
-      state.server.start(state.port, () => {
-        console.log(`Connect on ${state.server.ips[(state.server.ips.length - 1)]}:${state.port}`);
-        state.socket = io('http://localhost:' + state.port);
-
-        // Socket listeners
-        state.socket.on('chat message', msg => {
-          state.chats.main.push(msg);
-
-          emitter.emit('render');
-        });
-        state.socket.on('roll die', rollData => {
-          state.dieRolls.push(rollData);
-
-          emitter.emit('render', () => {
-            const log = document.getElementById('log');
-            log.scrollTop = log.scrollHeight;
-          });
-        });
-
-        state.socket.on('console.log', value => {
-          console.log(value);
-        });
+      // Socket listeners
+      state.socket.on('chat message', msg => {
+        state.chats.main.push(msg);
 
         emitter.emit('render');
       });
+      state.socket.on('roll die', rollData => {
+        state.dieRolls.push(rollData);
+
+        emitter.emit('render', () => {
+          const log = document.getElementById('log');
+          log.scrollTop = log.scrollHeight;
+        });
+      });
+
+      state.socket.on('console.log', value => {
+        console.log(value);
+      });
+
+      state.connected = true;
+      emitter.emit('render');
     });
     emitter.on('change view', newView => {
       state.currentView = newView;
@@ -86,6 +89,10 @@ app.use((state, emitter) => {
       state.currentView = newView;
       emitter.emit('render');
     });
+
+    if (state.server.hasStarted && !state.connected) {
+      emitter.emit('connect to server');
+    }
   });
 });
 
