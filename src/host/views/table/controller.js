@@ -5,10 +5,7 @@ export class TableController extends ViewController {
     // Super passes state, view name, and default state to ViewController,
     // which stores state in this.appState and the view controller's state to this.state
     super(state, 'table', {
-      assetWindow: {
-        tableImage: null,
-        pieces: [],
-      },
+      scratchNotes: '',
     });
 
     // If using controller methods in an input's onchange or onclick instance like this one's is,

@@ -1,15 +1,6 @@
-@import '../../../../node_modules/bulma/sass/utilities/mixins';
-@import '../../../../node_modules/bulma/sass/grid/tiles';
-
-.tile--table-view {
-  @extend .tile;
-  @extend .is-ancestor;
-
-  height: 100%;
-}
-
-#log {
+#log,
+#scratch {
   height: 80%;
-  max-height:250px;
+  max-height:350px;
   overflow-y: auto;
 }
