@@ -15,6 +15,7 @@ class Server {
 
     this.name = null;
     this.port = null;
+    this.connectURL = null;
 
     this.setupExpress();
     this.setupSocketIO();
@@ -80,6 +81,7 @@ class Server {
       this.http.listen(parseInt(port), () => {
         this.port = port;
         this.name = name;
+        this.connectURL = `${this.ips[(this.ips.length - 1)]}:${this.port}`;
         this.hasStarted = true;
         onStart();
       });

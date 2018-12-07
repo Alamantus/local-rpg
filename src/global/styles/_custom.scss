@@ -11,6 +11,8 @@ html, body {
   overflow-y: auto;
 }
 
+$header-height: 30px;
+
 .main-tabs {
   @extend .tabs;
 
@@ -20,7 +22,7 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 30px;
+  height: $header-height;
 
   &:not(:last-child) {
     margin-bottom: 0.5rem;
@@ -31,7 +33,7 @@ html, body {
   @extend .section;
 
   position: absolute;
-  top: 30px;
+  top: $header-height;
   left: 0;
   right: 0;
   bottom: 0;

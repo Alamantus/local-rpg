@@ -52,7 +52,7 @@ export default (state, emit) => {
 
     view = html`<body>
       <nav class="main-tabs">
-        <h1 class="title is-inline">${state.server.name}</h1>
+        <h1 class="title is-3 is-inline">${state.server.name}</h1>
         <ul>
           <li class=${ state.currentView === 'main' ? 'is-active' : null }>
             <a onclick=${() => {
@@ -83,6 +83,10 @@ export default (state, emit) => {
       </nav>
 
       <section class="main-section">
+        <div class="tags has-addons">
+          <span class="tag is-info">Players connect to:</span>
+          <span class="tag">http://${state.server.connectURL}</span>
+        </div>
         ${ htmlContent }
       </section>
 

@@ -53,7 +53,7 @@ app.use((state, emitter) => {
       });
     });
     emitter.on('connect to server', () => {
-      console.log(`Connect on ${state.server.ips[(state.server.ips.length - 1)]}:${state.server.port}`);
+      console.log(`Connect on ${state.server.connectURL}`);
       state.socket = io('http://localhost:' + state.server.port);
 
       // Socket listeners
