@@ -1,9 +1,9 @@
 import html from 'choo/html';
 import moment from 'moment';
 
-import './notes.scss';
+import './styles.scss';
 
-import { NotesController } from '../controllers/NotesController';
+import { NotesController } from './controller';
 
 export default (state, emit) => {
   const controller = new NotesController(state);

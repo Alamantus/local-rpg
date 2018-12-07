@@ -1,4 +1,4 @@
-import { ViewController } from '../ViewController';
+import { ViewController } from '../controller';
 
 import { Die } from '../../../global/Die';
 

@@ -1,8 +1,8 @@
 import html from 'choo/html';
 
-import './diceTray.css';
+import './styles.css';
 
-import { DiceTrayController } from '../../controllers/templates/DiceTrayController';
+import { DiceTrayController } from './controller';
 
 export default (state, emit) => {
   const controller = new DiceTrayController(state);

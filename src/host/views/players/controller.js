@@ -1,4 +1,4 @@
-import { ViewController } from './ViewController';
+import { ViewController } from '../controller';
 
 export class PlayersController extends ViewController {
   constructor (state) {

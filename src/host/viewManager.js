@@ -1,6 +1,6 @@
 import html from 'choo/html';
 
-import diceTray from './views/templates/diceTray';
+import diceTray from './views/diceTray';
 
 import setupView from './views/setup';
 import tableView from './views/table';

@@ -1,8 +1,8 @@
 import html from 'choo/html';
 
-import './sheets.scss';
+import './styles.scss';
 
-// import { SheetsController } from ‘../controllers/SheetsController’;
+// import { SheetsController } from '../controller';
 
 export default (state, emit) => {
   // const controller = new SheetsController(state);

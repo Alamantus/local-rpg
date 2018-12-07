@@ -1,9 +1,9 @@
 import html from 'choo/html';
 import moment from 'moment';
 
-import './table.scss';
+import './styles.scss';
 
-import { TableController } from '../controllers/TableController';
+import { TableController } from './controller';
 
 export default (state, emit) => {
   const controller = new TableController(state);

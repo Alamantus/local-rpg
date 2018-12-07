@@ -1,7 +1,0 @@
-@import '../../../node_modules/bulma/sass/utilities/mixins';
-@import '../../../node_modules/bulma/sass/grid/columns';
-
-.columns--sheets-view {
-  @extend .columns;
-  @extend .is-multiline;
-}

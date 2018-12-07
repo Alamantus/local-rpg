@@ -1,9 +1,9 @@
 import html from 'choo/html';
 import onload from 'on-load';
 
-import './players.scss';
+import './styles.scss';
 
-import { PlayersController } from '../controllers/PlayersController';
+import { PlayersController } from './controller';
 
 export default (state, emit) => {
   const controller = new PlayersController(state);
