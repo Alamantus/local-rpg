@@ -5,25 +5,45 @@
 ## Goal
 To have a locally hosted pen and paper RPG experience using laptops and various other devices connected via wifi. The Dungeon/Game Master will use a laptop or desktop computer to manage and display character and monster info, maps, and various other assets. All players can roll dice (and the DM/GM can create custom dice), and display their rolls.
 
+### Proposed Names
+
+* Local RPG
+* LARP
+
 ### Features
 - Custom Forms (for Character Sheets)
   - forms can be saved to Master computer
   - completed forms can be saved to Master computer
 - Dice rolling
   - various dice types of n size
-  - custom dice with custom sides and size
   - Master computer can roll dice "privately", and then display the result, for dramatic effect
-- Asset Management
-  - an "asset window", which is viewable by all players, and managed by the Master computer
-  - updates dynamically on change
-- Map
-  - draggable tiled map for use in the "asset window"
-
-### Stretch Features
-- Custom Effects
-  - Master computer can choose various players' screens and change the display to represent damage, game effects, and so on
 - "Whisper" chat
   - private chat system between players and DM
+- Character Management
+  - GM can view/manage player and non-player characters sheets
+  - players can edit custom forms as character sheets
+- Notes
+  - unlimited, dated, titled notes
+
+### Stretch Features
+- Custom Dice
+  - custom dice with custom sides and size
+- Item Management
+  - store every item and description entered so it can be re-used or passed from character to character while allowing edits to propogate to everywhere the item is used
+  - give/take items from characters by dragging the item entry to the character
+  - allow "inventory" macro within custom character sheets for displaying character items.
+- Asset Sharing
+  - GM can share images or other arbitrary files with their players
+- Custom Effects
+  - Master computer can choose various players' screens and change the display to represent damage, game effects, and so on
+
+### Super Stretchy Features
+- Web Hosting
+  - A website for using the program without a host computer and being on the same network as the host.
+- Maps
+  - grid-based map creation for the GM
+  - layers and optional backgrounds
+  - player-controlled pieces to move around
 
 ## Usage
 
@@ -38,7 +58,7 @@ _Every time you pull from the repo, be sure to re-run the install step in case s
 `npm run start` will build the host and client and start running the host Electron app.  
 `npm run dev` will start webpack watchers and the host Electron app, which will refresh on every change to `build` folder.
 
-Access client by going to localhost (or host computer's local IP address on network) at port 3000
+Access player client by going to localhost at the port you entered or using the "Players connect to" url on the Electron app while the device is connected to the same WiFi/network as the host.
 
 ## Contribution
 

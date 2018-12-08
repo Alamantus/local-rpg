@@ -46,9 +46,9 @@
     "asarUnpack": "./build/client/*"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "concurrently": "^4.1.0",
     "css-loader": "^0.28.7",
     "electron": "^3.0.10",
@@ -74,9 +74,9 @@
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
-    "moment": "^2.19.1",
+    "moment": "^2.22.2",
     "on-load": "^4.0.1",
-    "socket.io": "^2.0.3",
+    "socket.io": "^2.2.0",
     "whatwg-fetch": "^3.0.0"
   }
 }
