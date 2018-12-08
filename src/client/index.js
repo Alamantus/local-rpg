@@ -13,8 +13,37 @@ import io from 'socket.io-client';
 import { MovablePiece } from '../global/display/MovablePiece';
 
 $(function () {
-  const socket = io();
-  $('form').submit(function(){
+  let storedUser = window.localStorage.getItem('localRPG-user');
+  if (storedUser) {
+    storedUser = JSON.parse(storedUser);
+  }
+  const user = {
+    id: storedUser.id || null,
+    name: storedUser.name || null,
+  };
+
+  if (!user.name) {
+    const promptText = 'Please enter your real/out-of-character name.\nLetters, numbers, and spaces only—special characters will be removed.';
+    let namePrompt = prompt(promptText);
+    if (namePrompt != null) {
+      namePrompt = namePrompt.replace(/[^\w\d\s]/g, '');
+    }
+    while (!namePrompt) {
+      namePrompt = prompt('Name must not be blank.\n' + promptText);
+    }
+    user.name = namePrompt;
+  }
+  
+  const socket = io({
+    query: Object.assign({}, user),
+  });
+
+  socket.on('update id', newId => {
+    user.id = newId;
+    window.localStorage.setItem('localRPG-user', JSON.stringify(user));
+  });
+
+  $('form').submit(function(){  
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;
