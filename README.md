@@ -51,7 +51,9 @@ _Every time you pull from the repo, be sure to re-run the install step in case s
 
 ### Install
 
-`npm install` or `yarn` will install all the required `node_modules` and allow you to build and run the app.
+`yarn` will install all the required `node_modules` and allow you to build and run the app.
+
+We use [Yarn](https://yarnpkg.com) as our package manager—please avoid using `npm install`. NPM is only used to run scripts instead of installing and managing dependencies.
 
 ### Build and Run
 
