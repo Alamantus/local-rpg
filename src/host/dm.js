@@ -118,8 +118,8 @@ app.use((state, emitter) => {
 
     emitter.on('scroll log', () => {
       const log = document.getElementById('log');
-      log.scrollTop = log.scrollHeight;
-    })
+      $(log).animate({scrollTop: log.scrollHeight});
+    });
 
     emitter.on('roll die', newView => {
       state.currentView = newView;
