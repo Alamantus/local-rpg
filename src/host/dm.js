@@ -39,6 +39,15 @@ app.use((state, emitter) => {
     main: [],
   };
 
+  let storedUser = window.localStorage.getItem('localRPG-user');
+  if (storedUser) {
+    storedUser = JSON.parse(storedUser);
+  }
+  state.user = {
+    id: storedUser ? storedUser.id : '',
+    name: storedUser ? storedUser.name : '',
+  };
+
   // Listeners
   emitter.on('DOMContentLoaded', () => {
     // Emitter listeners
@@ -49,16 +58,25 @@ app.use((state, emitter) => {
           callback();
         }, 50);
       }
-
     });
+
     emitter.on('set game data', gameData => {
+      state.user.name = gameData.hostName ? gameData.hostName : 'GM';
       state.server.start(gameData, () => {
+        console.log('server started');
         emitter.emit('connect to server');
       });
     });
+
     emitter.on('connect to server', () => {
-      console.log(`Connect on ${state.server.connectURL}`);
-      state.socket = io('http://localhost:' + state.server.port);
+      state.socket = io('http://localhost:' + state.server.port, {
+        query: Object.assign({}, state.user),
+      });
+
+      state.socket.on('update id', newId => {
+        state.user.id = newId;
+        window.localStorage.setItem('localRPG-user', JSON.stringify(user));
+      });
 
       // Socket listeners
       state.socket.on('chat message', msg => {
@@ -80,8 +98,10 @@ app.use((state, emitter) => {
       });
 
       state.connected = true;
+      console.log('connected');
       emitter.emit('render');
     });
+
     emitter.on('change view', newView => {
       state.currentView = newView;
       emitter.emit('render', () => {
@@ -89,6 +109,7 @@ app.use((state, emitter) => {
         log.scrollTop = log.scrollHeight;
       });
     });
+
     emitter.on('roll die', newView => {
       state.currentView = newView;
       emitter.emit('render');

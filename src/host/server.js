@@ -17,6 +17,8 @@ class Server {
     this.port = null;
     this.connectURL = null;
 
+    this.connections = [];
+
     this.setupExpress();
     this.setupSocketIO();
   }
@@ -35,6 +37,14 @@ class Server {
     return addresses;
   }
 
+  uuid4() {
+    // https://stackoverflow.com/a/2117523
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
   setupExpress () {
     // When Electron has finished initializing, start the http server.
     this.server.use(express.static(path.join(__dirname, '../../build/client/')));
@@ -47,8 +57,22 @@ class Server {
 
   setupSocketIO () {
     this.io.on('connection', socket => {
-      console.log('a user connected');
-      this.emit('console.log', this.ips);
+      const { query } = socket.handshake;
+
+      socket.user = {
+        id: this.uuid4(),
+        name: query.name,
+      };
+      if (!query.id) {
+        socket.emit('update id', socket.user.id);
+      } else {
+        socket.user.id = query.id;
+      }
+      console.log('query', query.id, typeof query.id);
+      console.log('result', socket.user.id);
+      this.connections.push(socket);
+
+      this.emit('log', `User "${socket.user.name}" (${socket.user.id}) connected`);
 
       socket.on('chat message', function(msg){
         this.emit('chat message', msg);
@@ -65,7 +89,12 @@ class Server {
       });
 
       socket.on('disconnect', () => {
-        console.log('user disconnected');
+        const socketIndex = this.connections.findIndex(connection => connection.user.id == socket.user.id);
+        if (socketIndex && socketIndex >= 0) {
+          this.connections.splice(socketIndex, 1);
+        }
+        console.log(`user "${socket.user.name}" (${socket.user.id}) connected`);
+        socket = null;
       });
     });
   }
