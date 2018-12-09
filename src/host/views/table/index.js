@@ -4,6 +4,7 @@ import moment from 'moment';
 import './styles.scss';
 
 import { TableController } from './controller';
+import dieRoll from './dieRoll';
 
 export default (state, emit) => {
   const controller = new TableController(state);
@@ -14,18 +15,13 @@ export default (state, emit) => {
         <article class="box">
           <h2 class="title">Log</h2>
           <div id="log">
-          ${state.dieRolls.map(rollData => {
+          ${controller.logs.map(log => {
             return html`<div class="box is-marginless">
               <div class="content">
                 <p>
-                  <em>${ moment(rollData.time).fromNow()}</em><br />
-                  Rolled ${ rollData.rolls.length} ${rollData.dieName}<br />
-                  ${(rollData.rolls.length > 1)
-                  ? html`<span>${rollData.rolls.join(' + ')}<br /></span>`
-                  : ''
-                  }
-                  <strong>= ${ rollData.total}</strong>
+                  <em>${ moment(log.time).fromNow()}</em>
                 </p>
+                ${log.hasOwnProperty('dieName') ? dieRoll(log) : html`<p>${log.message}</p>`}
               </div>
             </div>`;
           })

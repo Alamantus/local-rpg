@@ -78,7 +78,7 @@ export class DiceTrayController extends ViewController {
 
   show () {
     if (this.state.roll) {
-      this.appState.socket.emit('roll die', this.state.roll);
+      this.appState.socket.emit('roll die', Object.assign({user: this.appState.user}, this.state.roll));
       this.state.roll = null;
     }
   }

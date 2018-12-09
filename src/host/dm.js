@@ -39,7 +39,7 @@ app.use((state, emitter) => {
     main: [],
   };
 
-  let storedUser = window.localStorage.getItem('localRPG-user');
+  let storedUser = localStorage.getItem('localRPG-user');
   if (storedUser) {
     storedUser = JSON.parse(storedUser);
   }
@@ -75,7 +75,7 @@ app.use((state, emitter) => {
 
       state.socket.on('update id', newId => {
         state.user.id = newId;
-        window.localStorage.setItem('localRPG-user', JSON.stringify(user));
+        localStorage.setItem('localRPG-user', JSON.stringify(state.user));
       });
 
       // Socket listeners
@@ -84,13 +84,19 @@ app.use((state, emitter) => {
 
         emitter.emit('render');
       });
+
       state.socket.on('roll die', rollData => {
         state.dieRolls.push(rollData);
 
-        emitter.emit('render', () => {
-          const log = document.getElementById('log');
-          log.scrollTop = log.scrollHeight;
+        emitter.emit('render', () => emitter.emit('scroll log'));
+      });
+
+      state.socket.on('log', message => {
+        state.logs.push({
+          message,
+          time: Date.now(),
         });
+        emitter.emit('render', () => emitter.emit('scroll log'));
       });
 
       state.socket.on('console.log', value => {
@@ -109,6 +115,11 @@ app.use((state, emitter) => {
         log.scrollTop = log.scrollHeight;
       });
     });
+
+    emitter.on('scroll log', () => {
+      const log = document.getElementById('log');
+      log.scrollTop = log.scrollHeight;
+    })
 
     emitter.on('roll die', newView => {
       state.currentView = newView;
