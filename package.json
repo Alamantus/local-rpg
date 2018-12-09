@@ -49,6 +49,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.7.0",
+    "choo-devtools": "^2.5.1",
     "concurrently": "^4.1.0",
     "css-loader": "^0.28.7",
     "electron": "^3.0.10",

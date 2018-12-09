@@ -22,6 +22,10 @@ import viewManager from './viewManager';
 const electronApp = window.require('electron').remote.app;
 const app = choo();
 
+if (process.env.NODE_ENV !== 'production') {
+  app.use(require('choo-devtools')());
+}
+
 // App state and emitters
 app.use((state, emitter) => {
   state.server = electronApp.app.server;

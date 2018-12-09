@@ -41,12 +41,12 @@ Start reading our code and you'll get the hang of it. We optimize for readabilit
 - We indent using two spaces (soft tabs)
 - We use ES2016 for our code.
 - We use Choo's `html` JavaScript template string wrapper ([bel](https://github.com/shama/bel)) for views.
-- We avoid logic in views, putting logic view logic into classes.
+- We avoid logic in views, putting view logic into classes.
 - We prefer semicolons in our JavaScript.
 - We ALWAYS put spaces after list items and method parameters (`[1, 2, 3]`, not `[1,2,3]`), around operators (`x += 1`, not `x+=1`), and around hash arrows.
 - We write comments to explain things that aren't basic (i.e. library code, clever tricks, etc).
 - We won't put too many restrictions on you, but just get a sense of the code style and try to emulate it before making changes. Nobody's perfect and even the maintainers miss things, but we at least aim to be consistent.
-- We follow the file structure logic. Files for the host app go in the `src/host` directory while client files go in `src/client`. Files shared between host and client go in `src/global`. Views go in the relevant `views` directories and controllers go in `controllers` directories. You get the idea.
+- We follow the file structure logic. Files for the host app go in the `src/host` directory while client files go in `src/client`. Files shared between host and client go in `src/global`. Views go in the relevant `views` directories. If the view needs a controller, create a folder with the view name, make the view the `index.js` of that folder, and create a `controller.js` within the folder. You get the idea.
 - We make sure our code is readable because this is open source software. Consider the people who will read your code, and make it look nice for them. It's sort of like driving a car: Perhaps you love doing donuts when you're alone, but with passengers the goal is to make the ride as smooth as possible.
 
 
