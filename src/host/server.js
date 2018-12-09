@@ -58,12 +58,11 @@ class Server {
   setupSocketIO () {
     this.io.on('connection', socket => {
       const { query } = socket.handshake;
-      query.id = JSON.parse(query.id);
+
       socket.user = {
         id: this.uuid4(),
         name: query.name,
       };
-
       if (!query.id) {
         socket.emit('update id', socket.user.id);
       } else {
@@ -72,7 +71,8 @@ class Server {
       console.log('query', query.id, typeof query.id);
       console.log('result', socket.user.id);
       this.connections.push(socket);
-      console.log(`user "${socket.user.name}" (${socket.user.id}) connected`);
+
+      this.emit('log', `User "${socket.user.name}" (${socket.user.id}) connected`);
 
       socket.on('chat message', function(msg){
         this.emit('chat message', msg);

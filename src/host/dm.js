@@ -40,8 +40,8 @@ app.use((state, emitter) => {
     storedUser = JSON.parse(storedUser);
   }
   state.user = {
-    id: storedUser ? storedUser.id : null,
-    name: storedUser ? storedUser.name : null,
+    id: storedUser ? storedUser.id : '',
+    name: storedUser ? storedUser.name : '',
   };
 
   // Listeners
@@ -59,18 +59,17 @@ app.use((state, emitter) => {
     emitter.on('set game data', gameData => {
       state.user.name = gameData.hostName ? gameData.hostName : 'GM';
       state.server.start(gameData, () => {
+        console.log('server started');
         emitter.emit('connect to server');
       });
     });
 
     emitter.on('connect to server', () => {
-      console.log(`Connect on ${state.server.connectURL}`);
       state.socket = io('http://localhost:' + state.server.port, {
         query: Object.assign({}, state.user),
       });
 
-      socket.on('update id', newId => {
-        console.log(newId);
+      state.socket.on('update id', newId => {
         state.user.id = newId;
         window.localStorage.setItem('localRPG-user', JSON.stringify(user));
       });
@@ -95,6 +94,7 @@ app.use((state, emitter) => {
       });
 
       state.connected = true;
+      console.log('connected');
       emitter.emit('render');
     });
 

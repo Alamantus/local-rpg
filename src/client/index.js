@@ -18,8 +18,8 @@ $(function () {
     storedUser = JSON.parse(storedUser);
   }
   const user = {
-    id: storedUser.id || null,
-    name: storedUser.name || null,
+    id: storedUser ? storedUser.id : '',
+    name: storedUser ? storedUser.name : '',
   };
 
   if (!user.name) {
