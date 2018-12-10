@@ -1,6 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 const path = require('path');
 const url = require('url');
+const fs = require('fs-jetpack');
 
 // If using npm run dev, electron window will reload when changes are made.
 require('electron-reload')(path.resolve(__dirname, '../../build'));
@@ -57,6 +58,42 @@ class App {
       // in an array if your app supports multi windows, this is the time
       // when you should delete the corresponding element.
       this.win = null;
+    });
+  }
+
+  saveSession (sessionData, quiet = false) {
+    const data = JSON.stringify(sessionData);
+
+    if (!this.sessionSaveLocation) {
+      fs.dir(path.resolve('./sessions'));
+
+      this.sessionSaveLocation = dialog.showSaveDialog(this.win, {
+        title: 'Save Session',
+        defaultPath: path.resolve('./sessions/session.json'),
+        filters: [
+          {
+            name: 'JSON',
+            extensions: ['json'],
+          },
+        ],
+      });
+    }
+
+    if (this.sessionSaveLocation) {
+      // fs-jetpack "async" methods return Promises.
+      return fs.writeAsync(this.sessionSaveLocation, data).then(() => {
+        if (!quiet) {
+          dialog.showMessageBox({
+            title: 'Success!',
+            message: `Saved to ${this.sessionSaveLocation}`,
+          });
+        }
+      });
+    }
+
+    // If no sessionSaveLocation is set (the dialog is canceled), return a rejected Promise.
+    return new Promise((resolve, reject) => {
+      reject('Canceled');
     });
   }
 }

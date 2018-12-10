@@ -16,6 +16,7 @@ import choo from 'choo';
 import html from 'choo/html';
 
 import { MovablePiece } from '../global/display/MovablePiece';
+import { FileManager } from './fileManager';
 
 import viewManager from './viewManager';
 
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // App state and emitters
 app.use((state, emitter) => {
+  state.electronApp = electronApp.app;
   state.server = electronApp.app.server;
   state.socket = null;
   state.connected = false;
@@ -61,10 +63,20 @@ app.use((state, emitter) => {
     });
 
     emitter.on('set game data', gameData => {
+      state.gameName = gameData.name ? gameData.name : 'GM';
       state.user.name = gameData.hostName ? gameData.hostName : 'GM';
-      state.server.start(gameData, () => {
-        console.log('server started');
-        emitter.emit('connect to server');
+      const fileManager = new FileManager(state);
+
+      fileManager.saveSession()
+      .then(() => {
+        state.server.start(gameData, () => {
+          console.info('server started');
+          emitter.emit('connect to server');
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        emitter.emit('render');
       });
     });
 
