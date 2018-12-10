@@ -61,6 +61,32 @@ class App {
     });
   }
 
+  loadSession () {
+    fs.dir(path.resolve('./sessions'));
+
+    this.sessionSaveLocation = dialog.showOpenDialog(this.win, {
+      title: 'Open Session',
+      defaultPath: path.resolve('./sessions'),
+      filters: [
+        {
+          name: 'JSON',
+          extensions: ['json'],
+        },
+      ],
+    });
+
+    if (this.sessionSaveLocation) {
+      this.sessionSaveLocation = this.sessionSaveLocation[0];
+      // fs-jetpack "async" methods return Promises.
+      return fs.readAsync(this.sessionSaveLocation, 'json');
+    }
+
+    // If no sessionSaveLocation is set (the dialog is canceled), return a rejected Promise.
+    return new Promise((resolve, reject) => {
+      reject('Canceled');
+    });
+  }
+
   saveSession (sessionData, quiet = false) {
     const data = JSON.stringify(sessionData);
 

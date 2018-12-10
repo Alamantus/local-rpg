@@ -3,11 +3,26 @@ export class FileManager {
     this.state = state;
   }
 
+  loadSession () {
+    return this.state.electronApp.loadSession()
+    .then(session => {
+      this.state.gameName = session.gameName;
+      this.state.post = session.post;
+      this.state.notes = session.notes;
+      return true;
+    })
+    .catch(error => {
+      console.error(error);
+      return false;
+    });
+  }
+
   saveSession (quiet = false) {
     const sessionData = {
       gameName: this.state.gameName,
-      notes: this.state.viewStates.hasOwnProperty('notes')
-        ? this.state.viewStates['notes'].notes
+      port: this.state.port,
+      notes: this.state.hasOwnProperty('notes')
+        ? this.state.notes
         : [],
     }
 
