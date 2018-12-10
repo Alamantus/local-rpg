@@ -33,6 +33,8 @@ app.use((state, emitter) => {
   state.server = electronApp.app.server;
   state.socket = null;
   state.connected = false;
+  state.gameName = 'A Game';
+  state.port = 3000;
   state.currentView = 'main';
   state.viewStates = {};
   state.notes = [];
@@ -56,31 +58,37 @@ app.use((state, emitter) => {
     // Emitter listeners
     emitter.on('render', callback => {
       // This is a dirty hack to get the callback to call *after* re-rendering.
-      if (callback && $.isFunction(callback)){
+      if (callback && $.isFunction(callback)) {
         setTimeout(() => {
           callback();
         }, 50);
       }
     });
 
-    emitter.on('set game data', gameData => {
-      state.gameName = gameData.name ? gameData.name : 'A Game';
-      state.port = gameData.port ? gameData.port : '3000';
-      state.user.name = gameData.hostName ? gameData.hostName : 'GM';
+    emitter.on('set game data', () => {
       const fileManager = new FileManager(state);
 
       fileManager.saveSession()
       .then(() => {
-        state.server.start(gameData, () => {
-          console.info('server started');
-          emitter.emit('connect to server');
-        });
+        emitter.emit('start server');
       })
       .catch((error) => {
         console.error(error);
         emitter.emit('render');
       });
     });
+
+    emitter.on('start server', () => {
+      const serverSettings = {
+        name: state.gameName,
+        port: state.port,
+      };
+
+      state.server.start(serverSettings, () => {
+        console.info('server started');
+        emitter.emit('connect to server');
+      });
+    })
 
     emitter.on('connect to server', () => {
       state.socket = io('http://localhost:' + state.server.port, {
