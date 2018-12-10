@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron');
+const { app, BrowserWindow, clipboard, dialog, shell } = require('electron');
 const path = require('path');
 const url = require('url');
 const fs = require('fs-jetpack');
@@ -12,11 +12,14 @@ class App {
     this.win = null;
 
     this.server = require('./server');
+
+    this.filesLocation = path.resolve('./files/');
   }
 
   start () {
     app.on('ready', () => {
       this.createWindow();
+      fs.dir(this.filesLocation);
     });
 
     // Quit when all windows are closed.
@@ -59,6 +62,14 @@ class App {
       // when you should delete the corresponding element.
       this.win = null;
     });
+  }
+
+  copyServeURL () {
+    clipboard.writeText(this.server.connectURL);
+  }
+
+  openFilesLocation () {
+    shell.openItem(this.filesLocation);
   }
 
   loadSession () {

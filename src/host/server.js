@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const serveIndex = require('serve-index');
 const os = require('os');
 const http = require('http');
 const socketio = require('socket.io');
@@ -48,6 +49,8 @@ class Server {
   setupExpress () {
     // When Electron has finished initializing, start the http server.
     this.server.use(express.static(path.join(__dirname, '../../build/client/')));
+    this.server.use('/files', express.static('./files/'));
+    this.server.use('/files', serveIndex('./files/'));
 
     this.server.get('/', (req, res) => {
       const chatPath = path.join(__dirname, '../../build/client/client.html');
@@ -110,7 +113,7 @@ class Server {
       this.http.listen(parseInt(port), () => {
         this.port = port;
         this.name = name;
-        this.connectURL = `${this.ips[(this.ips.length - 1)]}:${this.port}`;
+        this.connectURL = `http://${this.ips[(this.ips.length - 1)]}:${this.port}`;
         this.hasStarted = true;
         onStart();
       });

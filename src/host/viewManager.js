@@ -83,10 +83,24 @@ export default (state, emit) => {
       </nav>
 
       <section class="main-section">
-        <div id="connectionInfo">
-          <div class="tags has-addons">
-            <span class="tag is-info">Players connect to:</span>
-            <span class="tag">http://${state.server.connectURL}</span>
+        <div id="connectionInfo" class="field is-grouped">
+          <div class="control">
+            <div class="tags has-addons">
+              <span class="tag is-info">Players connect to:</span>
+              <a class="tag" onclick=${() => state.electronApp.copyServeURL()}>
+                <span>${state.server.connectURL}</span>
+                <span class="icon"><i class="fa fa-files-o"></i></span>
+              </a>
+            </div>
+          </div>
+          <div class="control">
+            <div class="tags has-addons">
+              <span class="tag is-info">Share files from:</span>
+              <a class="tag" onclick=${() => state.electronApp.openFilesLocation()}>
+                <span>${state.electronApp.filesLocation}</span>
+                <span class="icon"><i class="fa fa-folder-open"></i></span>
+              </a>
+            </div>
           </div>
         </div>
         <div id="mainContent">
