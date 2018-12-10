@@ -10,35 +10,9 @@ export default (state, emit) => {
   const controller = new TableController(state);
 
   return [
-    html`<div class="columns">
-      <div class="column is-two-thirds">
-        <article class="box">
-          <h2 class="title">Log</h2>
-          <div id="log">
-          ${controller.logs.map(log => {
-            return html`<div class="box is-marginless">
-              <div class="content">
-                <p>
-                  <em>${ moment(log.time).fromNow()}</em>
-                </p>
-                ${log.hasOwnProperty('dieName') ? dieRoll(log) : html`<p>${log.message}</p>`}
-              </div>
-            </div>`;
-          })
-          }
-          </div>
-        </article>
-      </div>
-      <div class="column is-one-third">
-        <article class="box">
-          <h2 class="title">Scratch Notes</h2>
-          <textarea id="scratch" class="textarea" oninput=${event => controller.state.scratchNotes = event.target.value}>${controller.state.scratchNotes}</textarea>
-        </article>
-      </div>
-    </div>`,
-    html`<div class="columns">
-      <div class="column">
-        <article class="box">
+    html`<div class="tile is-ancestor" style="height:100%;">
+      <div class="tile is-parent is-8">
+        <article class="tile is-child box">
           <h2 class="title">Characters</h2>
           <div class="columns">
             <div class="column is-one-quarter">
@@ -85,6 +59,30 @@ export default (state, emit) => {
               </a>
             </div>
           </div>
+        </article>
+      </div>
+
+      <div class="tile is-parent is-vertical is-4">
+        <article class="tile is-child box">
+          <h2 class="title">Log</h2>
+          <div id="log">
+          ${controller.logs.map(log => {
+            return html`<div class="box is-marginless">
+              <div class="content">
+                <p>
+                  <em>${ moment(log.time).fromNow()}</em>
+                </p>
+                ${log.hasOwnProperty('dieName') ? dieRoll(log) : html`<p>${log.message}</p>`}
+              </div>
+            </div>`;
+          })
+          }
+          </div>
+        </article>
+
+        <article class="tile is-child box">
+          <h2 class="title">Scratch Notes</h2>
+          <textarea id="scratch" class="textarea" oninput=${event => controller.state.scratchNotes = event.target.value}>${controller.state.scratchNotes}</textarea>
         </article>
       </div>
     </div>`,

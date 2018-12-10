@@ -83,11 +83,15 @@ export default (state, emit) => {
       </nav>
 
       <section class="main-section">
-        <div class="tags has-addons">
-          <span class="tag is-info">Players connect to:</span>
-          <span class="tag">http://${state.server.connectURL}</span>
+        <div id="connectionInfo">
+          <div class="tags has-addons">
+            <span class="tag is-info">Players connect to:</span>
+            <span class="tag">http://${state.server.connectURL}</span>
+          </div>
         </div>
-        ${ htmlContent }
+        <div id="mainContent">
+          ${ htmlContent }
+        </div>
       </section>
 
       ${ diceTray(state, emit) }
