@@ -3,7 +3,7 @@ export class FileManager {
     this.state = state;
   }
 
-  saveSession () {
+  saveSession (quiet = false) {
     const sessionData = {
       gameName: this.state.gameName,
       notes: this.state.viewStates.hasOwnProperty('notes')
@@ -12,6 +12,6 @@ export class FileManager {
     }
 
     // Return the Promise.
-    return this.state.electronApp.saveSession(sessionData);
+    return this.state.electronApp.saveSession(sessionData, quiet);
   }
 }

@@ -1,5 +1,7 @@
 import { ViewController } from '../controller';
 
+import { FileManager } from '../../fileManager';
+
 export class NotesController extends ViewController {
   constructor (state) {
     // Super passes state, view name, and default state to ViewController,
@@ -25,6 +27,13 @@ export class NotesController extends ViewController {
 
   get currentNote () {
     return this.state.notes[this.state.displayedNote];
+  }
+
+  saveNotes () {
+    const fileManager = new FileManager(this.appState);
+    return fileManager.saveSession(true)
+    .then(() => console.log('saved notes'))
+    .catch(error => console.error('could not save session'));
   }
 
   sortNotes (byField, ascending = true) {
@@ -57,6 +66,7 @@ export class NotesController extends ViewController {
     };
     this.state.notes.unshift(newNote);
     this.updateNoteIndices();
+    this.saveNotes();
 
     // Return the newly created note's index.
     return 0;
@@ -65,7 +75,7 @@ export class NotesController extends ViewController {
   delete (emit, noteIndex) {
     this.state.notes.splice(noteIndex, 1);
     this.updateNoteIndices();
-    this.close(emit);
+    this.saveNotes().then(() => this.close(emit));
   }
 
   populateTextarea () {
@@ -91,6 +101,7 @@ export class NotesController extends ViewController {
     }
     this.currentNote.name = value;
     this.currentNote.updated = Date.now();
+    this.saveNotes();
 
     emit('render', () => this.populateTextarea());
   }
@@ -104,5 +115,6 @@ export class NotesController extends ViewController {
     }
     this.currentNote.content = value;
     this.currentNote.updated = Date.now();
+    this.saveNotes();
   }
 }
