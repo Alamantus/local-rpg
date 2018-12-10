@@ -8,7 +8,6 @@ export class NotesController extends ViewController {
     // which stores state in this.appState and the view controller's state to this.state
     super(state, 'notes', {
       currentPage: 0,
-      notes: [],
       displayedNote: null,
     });
 
@@ -16,17 +15,18 @@ export class NotesController extends ViewController {
   }
 
   get numberOfPages () {
-    const totalPages = Math.ceil(this.state.notes.length / this.notesPerPage);
+    const totalPages = Math.ceil(this.appState.notes.length / this.notesPerPage);
     return (totalPages > 0) ? totalPages : 1;
   }
 
   get currentPageNotes () {
-    const { notes, currentPage } = this.state;
+    const { notes } = this.appState;
+    const { currentPage } = this.state;
     return notes.slice(currentPage * this.notesPerPage, (currentPage + 1) * this.notesPerPage);
   }
 
   get currentNote () {
-    return this.state.notes[this.state.displayedNote];
+    return this.appState.notes[this.state.displayedNote];
   }
 
   saveNotes () {
@@ -37,7 +37,7 @@ export class NotesController extends ViewController {
   }
 
   sortNotes (byField, ascending = true) {
-    this.state.notes.sort((a, b) => {
+    this.appState.notes.sort((a, b) => {
       if (a[byField] == b[byField]) return 0;
       const sort = (a[byField] > b[byField]) ? 1 : -1;
       return ascending ? sort : sort * -1;
@@ -47,7 +47,7 @@ export class NotesController extends ViewController {
   }
 
   updateNoteIndices () {
-    this.state.notes.forEach((note, index) => {
+    this.appState.notes.forEach((note, index) => {
       note.index = index;
     });
   }
@@ -64,7 +64,7 @@ export class NotesController extends ViewController {
       updated: Date.now(),
       content: '',
     };
-    this.state.notes.unshift(newNote);
+    this.appState.notes.unshift(newNote);
     this.updateNoteIndices();
     this.saveNotes();
 
@@ -73,7 +73,7 @@ export class NotesController extends ViewController {
   }
 
   delete (emit, noteIndex) {
-    this.state.notes.splice(noteIndex, 1);
+    this.appState.notes.splice(noteIndex, 1);
     this.updateNoteIndices();
     this.saveNotes().then(() => this.close(emit));
   }

@@ -35,6 +35,7 @@ app.use((state, emitter) => {
   state.connected = false;
   state.currentView = 'main';
   state.viewStates = {};
+  state.notes = [];
   state.logs = [];
   state.dieRolls = [];
   state.chats = {
@@ -63,7 +64,8 @@ app.use((state, emitter) => {
     });
 
     emitter.on('set game data', gameData => {
-      state.gameName = gameData.name ? gameData.name : 'GM';
+      state.gameName = gameData.name ? gameData.name : 'A Game';
+      state.port = gameData.port ? gameData.port : '3000';
       state.user.name = gameData.hostName ? gameData.hostName : 'GM';
       const fileManager = new FileManager(state);
 
