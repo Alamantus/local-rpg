@@ -12,6 +12,7 @@ export class SetupController extends ViewController {
 
     this.emit = emit;
     this.defaultHostName = 'GM';
+    this.fileManager = new FileManager(state);
   }
 
   setGameName (event) {
@@ -19,15 +20,15 @@ export class SetupController extends ViewController {
   }
 
   setPort (event) {
-    this.appState.port = event.target.value;
+    this.appState.port = parseInt(event.target.value);
   }
 
   setHostName (event) {
     this.appState.user.name = event.target.value.replace(/[^\w\d\s]/g, '');
     this.emit('render');
   }
-
-  startServer () {
+  
+  buttonAction (action) {
     this.appState.user.name = this.appState.user.name.replace(/[^\w\d\s]/g, '');
 
     if (!this.appState.user.name) {
@@ -38,19 +39,17 @@ export class SetupController extends ViewController {
     
     this.emit('render', () => {
       this.state.isStarting = false;
-      this.emit('set game data');
-    });
-  }
 
-  loadSession () {
-    const fileManager = new FileManager(this.appState);
-    fileManager.loadSession().then(loaded => {
-      if (loaded) {
-        if (!this.appState.user.name) {
-          this.appState.user.name = this.defaultHostName;
+      const promise = action == 'save' ? this.fileManager.saveSession() : this.fileManager.loadSession();
+      promise.then(successful => {
+        if (successful) {
+          this.emit('start server');
         }
-        this.emit('start server');
-      }
+      })
+      .catch((error) => {
+        console.error(error);
+        this.emit('render');
+      });
     });
   }
 }

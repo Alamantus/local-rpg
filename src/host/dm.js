@@ -33,8 +33,6 @@ app.use((state, emitter) => {
   state.server = electronApp.app.server;
   state.socket = null;
   state.connected = false;
-  state.gameName = 'A Game';
-  state.port = 3000;
   state.currentView = 'main';
   state.viewStates = {};
   state.notes = [];
@@ -43,6 +41,13 @@ app.use((state, emitter) => {
   state.chats = {
     main: [],
   };
+
+  let storedServerSettings = localStorage.getItem('localRPG-lastServerSettings');
+  if (storedServerSettings) {
+    storedServerSettings = JSON.parse(storedServerSettings);
+  }
+  state.gameName = storedServerSettings ? storedServerSettings.name : 'A Game';
+  state.port = storedServerSettings ? storedServerSettings.port : 3000;
 
   let storedUser = localStorage.getItem('localRPG-user');
   if (storedUser) {
@@ -65,19 +70,6 @@ app.use((state, emitter) => {
       }
     });
 
-    emitter.on('set game data', () => {
-      const fileManager = new FileManager(state);
-
-      fileManager.saveSession()
-      .then(() => {
-        emitter.emit('start server');
-      })
-      .catch((error) => {
-        console.error(error);
-        emitter.emit('render');
-      });
-    });
-
     emitter.on('start server', () => {
       const serverSettings = {
         name: state.gameName,
@@ -85,6 +77,8 @@ app.use((state, emitter) => {
       };
 
       state.server.start(serverSettings, () => {
+        localStorage.setItem('localRPG-lastServerSettings', JSON.stringify(serverSettings));
+        emitter.emit('save user');
         console.info('server started');
         emitter.emit('connect to server');
       });
@@ -97,7 +91,7 @@ app.use((state, emitter) => {
 
       state.socket.on('update id', newId => {
         state.user.id = newId;
-        localStorage.setItem('localRPG-user', JSON.stringify(state.user));
+        emitter.emit('save user');
       });
 
       // Socket listeners
@@ -128,6 +122,10 @@ app.use((state, emitter) => {
       state.connected = true;
       console.log('connected');
       emitter.emit('render');
+    });
+
+    emitter.on('save user', () => {
+      localStorage.setItem('localRPG-user', JSON.stringify(state.user));
     });
 
     emitter.on('change view', newView => {
