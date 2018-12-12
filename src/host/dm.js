@@ -151,13 +151,6 @@ app.use((state, emitter) => {
       emitter.emit('render');
     });
 
-    emitter.on('use sheet', (sheetId) => {
-      state.sheetData.push({
-        sheetId,
-        name: 'A Character',
-      });
-    });
-
     if (state.server.hasStarted && !state.connected) {
       emitter.emit('connect to server');
     }

@@ -14,12 +14,18 @@ export default (state, emit) => {
       ${controller.appState.sheets.map((sheet, index) => {
         return html`<div class="column is-one-quarter">
           <div class="card">
-            <a onclick=${() => controller.editSheet(index)}>
-              <div class="card-content">
-                <h3 class="title is-3">${sheet.name}</h3>
-                <!--h4 class="subtitle is-4">Character Sheet Description</h4-->
-              </div>
-            </a>
+            <div class="card-content">
+              <h3 class="title is-3">${sheet.name}</h3>
+              <!--h4 class="subtitle is-4">Character Sheet Description</h4-->
+            </div>
+            <div class="card-footer">
+              <a class="card-footer-item" onclick=${() => controller.editSheet(index)}>
+                Use
+              </a>
+              <a class="card-footer-item" onclick=${() => controller.editSheet(index)}>
+                Edit
+              </a>
+            </div>
           </div>
         </div>`;
       })}

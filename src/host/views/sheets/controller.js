@@ -72,7 +72,7 @@ export class SheetsController extends ViewController {
     this.appState.sheets.push({
       id: idManager.uuid4(),
       name: 'New Sheet',
-      html: '<label>Name <input type="text" id="name" /><label>',
+      html: '<!--Note: Sheet must contain a field with an id of "name"-->\n<label>Name <input type="text" id="name" /><label>',
     });
     this.state.sheetToEdit = this.appState.sheets.length - 1;
     this.emit('render', () => this.renderEditor());
@@ -91,9 +91,23 @@ export class SheetsController extends ViewController {
   
   closeSheet () {
     if (this.state.sheetToEdit != null) {
-      if (this.currentSheet != null && this.currentSheet.name == '') {
-        this.currentSheet.name = this.defaultSheetName;
+      if (this.currentSheet != null) {
+        if (this.currentSheet.name == '') {
+          this.currentSheet.name = this.defaultSheetName;
+        }
+
+        this.currentSheet.fields = ['name'];
+        const controller = this;
+        const sheetHTML = html`<div></div>`;
+        sheetHTML.innerHTML = this.currentSheet.html;
+        $(sheetHTML).find('input, select, textarea').each(function() {
+          const elementId = $(this).attr('id');
+          if (elementId && !controller.currentSheet.fields.includes(elementId)) {
+            controller.currentSheet.fields.push(elementId);
+          }
+        });
       }
+
       this.destroyEditor();
       const fileManager = new FileManager(this.appState);
       fileManager.saveSession(true)
