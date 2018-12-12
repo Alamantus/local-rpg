@@ -31,13 +31,9 @@ app.use((state, emitter) => {
   state.connected = false;
   state.currentView = 'main';
   state.viewStates = {};
+  state.sheets = [];
+  state.sheetData = [];
   state.notes = [];
-  state.sheets = [
-    {
-      name: 'test',
-      html: '<label>Name <input type="text" id="name" /><label>',
-    }
-  ];
   state.logs = [];
   state.dieRolls = [];
   state.chats = {
@@ -153,6 +149,13 @@ app.use((state, emitter) => {
     emitter.on('roll die', newView => {
       state.currentView = newView;
       emitter.emit('render');
+    });
+
+    emitter.on('use sheet', (sheetId) => {
+      state.sheetData.push({
+        sheetId,
+        name: 'A Character',
+      });
     });
 
     if (state.server.hasStarted && !state.connected) {

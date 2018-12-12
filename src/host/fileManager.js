@@ -7,6 +7,7 @@ export class FileManager {
     return this.state.electronApp.loadSession()
     .then(session => {
       this.state.sheets = session.hasOwnProperty('sheets') ? session.sheets : [];
+      this.state.sheetData = session.hasOwnProperty('sheetData') ? session.sheetData : [];
       this.state.notes = session.hasOwnProperty('notes') ? session.notes : [];
       return true;
     })
@@ -19,6 +20,7 @@ export class FileManager {
   saveSession (quiet = false) {
     const sessionData = {
       sheets: this.state.hasOwnProperty('sheets') ? this.state.sheets : [],
+      sheetData: this.state.hasOwnProperty('sheetData') ? this.state.sheetData : [],
       notes: this.state.hasOwnProperty('notes') ? this.state.notes : [],
     }
 
