@@ -48,8 +48,7 @@ class App {
 
   createWindow () {
     // Create the browser window.
-    this.win = new BrowserWindow({width: 1000, height: 600});
-    this.win.maximize();
+    this.win = new BrowserWindow({width: 1200, height: 700});
 
     // and load the index.html of the app.
     this.win.loadURL(url.format({
