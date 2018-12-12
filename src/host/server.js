@@ -5,6 +5,8 @@ const os = require('os');
 const http = require('http');
 const socketio = require('socket.io');
 
+import IDManager from '../global/IDManager';
+
 class Server {
   constructor () {
     this.server = express();
@@ -38,14 +40,6 @@ class Server {
     return addresses;
   }
 
-  uuid4() {
-    // https://stackoverflow.com/a/2117523
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
-
   setupExpress () {
     // When Electron has finished initializing, start the http server.
     this.server.use(express.static(path.join(__dirname, '../../build/client/')));
@@ -63,7 +57,7 @@ class Server {
       const { query } = socket.handshake;
 
       socket.user = {
-        id: this.uuid4(),
+        id: IDManager.uuid4(),
         name: query.name,
       };
       if (!query.id) {
