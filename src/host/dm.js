@@ -104,13 +104,17 @@ app.use((state, emitter) => {
       state.socket.on('chat message', msg => {
         state.chats.main.push(msg);
 
-        emitter.emit('render');
+        if (state.currentView == 'players') {
+          emitter.emit('render');
+        }
       });
 
       state.socket.on('roll die', rollData => {
         state.dieRolls.push(rollData);
 
-        emitter.emit('render', () => emitter.emit('scroll log'));
+        if (state.currentView == 'table') {
+          emitter.emit('render', () => emitter.emit('scroll log'));
+        }
       });
 
       state.socket.on('log', message => {
@@ -118,7 +122,10 @@ app.use((state, emitter) => {
           message,
           time: Date.now(),
         });
-        emitter.emit('render', () => emitter.emit('scroll log'));
+
+        if (state.currentView == 'table') {
+          emitter.emit('render', () => emitter.emit('scroll log'));
+        }
       });
 
       state.socket.on('console.log', value => {
