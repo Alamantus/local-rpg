@@ -1,3 +1,4 @@
+import html from 'choo/html';
 import ace from 'brace';
 import 'brace/mode/html';
 import 'brace/theme/chrome';
@@ -23,6 +24,12 @@ export class SheetsController extends ViewController {
     : null;
   }
 
+  getSheetPreviewHTML () {
+    const preview = html`<div></div>`;
+    preview.innerHTML = this.currentSheet.html;
+    return preview;
+  }
+
   editSheetName (event) {
     this.currentSheet.name = event.target.value;
   }
@@ -43,7 +50,9 @@ export class SheetsController extends ViewController {
   }
 
   destroyEditor () {
-    ace.edit('sheetEditor').destroy();
+    if (document.getElementById('sheetEditor')) {
+      ace.edit('sheetEditor').destroy();
+    }
   }
 
   showPreview (doShow) {

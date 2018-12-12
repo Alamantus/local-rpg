@@ -23,8 +23,28 @@ export default (controller) => {
         </div>
         <button class="delete" aria-label="close" onclick=${() => controller.closeSheet()}></button>
       </header>
-      <section class="modal-card-body" id="sheetEditorContainer">
-        <div id="sheetEditor"></div>
+      <section class="modal-card-body">
+        <div class="tabs">
+          <ul>
+            <li class="${!controller.state.showPreview ? 'is-active' : ''}">
+              <a onclick=${() => controller.showPreview(false)}>
+                Edit
+              </a>
+            </li>
+            <li class="${controller.state.showPreview ? 'is-active' : ''}">
+              <a onclick=${() => controller.showPreview(true)}>
+                Preview
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        ${controller.state.showPreview
+        ? controller.getSheetPreviewHTML()
+        : html`<div id="sheetEditorContainer">
+          <div id="sheetEditor"></div>
+        </div>`
+        }
       </section>
       <footer class="modal-card-foot">
         <button class="button is-text" onclick=${ () => controller.closeSheet()}>
