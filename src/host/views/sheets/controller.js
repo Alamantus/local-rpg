@@ -7,6 +7,7 @@ import { ViewController } from '../controller';
 
 import { FileManager } from '../../fileManager';
 import idManager from '../../../global/IDManager';
+import { sheetStructure } from '../../../global/defaults';
 
 export class SheetsController extends ViewController {
   constructor (state, emit) {
@@ -69,11 +70,9 @@ export class SheetsController extends ViewController {
   }
 
   createNewSheet () {
-    this.appState.sheets.push({
-      id: idManager.uuid4(),
-      name: 'New Sheet',
-      html: '<!--Note: Sheet must contain a field with an id of "name"-->\n<label>Name <input type="text" id="name" /><label>',
-    });
+    const newSheet = sheetStructure();
+    newSheet.id = idManager.uuid4();
+    this.appState.sheets.push(newSheet);
     this.state.sheetToEdit = this.appState.sheets.length - 1;
     this.emit('render', () => this.renderEditor());
   }

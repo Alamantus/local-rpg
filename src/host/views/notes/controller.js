@@ -1,6 +1,7 @@
 import { ViewController } from '../controller';
 
 import { FileManager } from '../../fileManager';
+import { noteStructure } from '../../../global/defaults';
 
 export class NotesController extends ViewController {
   constructor (state) {
@@ -58,12 +59,8 @@ export class NotesController extends ViewController {
   }
 
   create (name) {
-    const newNote = {
-      name,
-      created: Date.now(),
-      updated: Date.now(),
-      content: '',
-    };
+    const newNote = noteStructure();
+    newNote.name = name;
     this.appState.notes.unshift(newNote);
     this.updateNoteIndices();
     this.saveNotes();

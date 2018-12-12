@@ -1,6 +1,7 @@
 import { ViewController } from '../../controller';
 
 import idManager from '../../../../global/IDManager';
+import { sheetStructure, characterSheetStructure } from '../../../../global/defaults';
 
 export class CharacterPanelController extends ViewController {
   constructor(state, emit) {
@@ -48,19 +49,18 @@ export class CharacterPanelController extends ViewController {
   }
   
   createCharacter () {
-    console.log('creating');
-    const id = idManager.uuid4();
-    
-    this.appState.sheetData.push({
-      sheetId: this.appState.sheets[0].id,
-      id,
-      owner: null,
-      fields: {
-        name: 'New Character',
-      },
-    });
+    if (this.appState.sheets.length <= 0) {
+      alert('You need to create a sheet first');
+      this.emit('change view', 'sheets');
+    } else {
+      const newCharacter = characterSheetStructure();
+      newCharacter.id = idManager.uuid4();
+      newCharacter.sheetId = this.appState.sheets[0].id;
+      
+      this.appState.sheetData.push(newCharacter);
 
-    this.showCharacter(id);
+      this.showCharacter(newCharacter.id);
+    }
   }
 
   showCharacter (characterId) {
