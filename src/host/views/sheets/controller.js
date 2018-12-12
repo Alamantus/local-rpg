@@ -6,6 +6,7 @@ import 'brace/theme/chrome';
 import { ViewController } from '../controller';
 
 import { FileManager } from '../../fileManager';
+import idManager from '../../../global/IDManager';
 
 export class SheetsController extends ViewController {
   constructor (state, emit) {
@@ -69,6 +70,7 @@ export class SheetsController extends ViewController {
 
   createNewSheet () {
     this.appState.sheets.push({
+      id: idManager.uuid4(),
       name: 'New Sheet',
       html: '<label>Name <input type="text" id="name" /><label>',
     });
@@ -82,6 +84,7 @@ export class SheetsController extends ViewController {
   }
 
   deleteSheet () {
+    this.appState.sheetData = this.appState.sheetData.filter(sheet => sheet.id != this.currentSheet.id);
     this.appState.sheets.splice(this.state.sheetToEdit, 1);
     this.closeSheet();
   }

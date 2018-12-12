@@ -16,4 +16,4 @@ class IDManager {
   }
 }
 
-export default (new IDManager);
+module.exports = (new IDManager);

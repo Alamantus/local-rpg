@@ -5,7 +5,7 @@ const os = require('os');
 const http = require('http');
 const socketio = require('socket.io');
 
-import IDManager from '../global/IDManager';
+const idManager = require('../global/IDManager');
 
 class Server {
   constructor () {
@@ -57,7 +57,7 @@ class Server {
       const { query } = socket.handshake;
 
       socket.user = {
-        id: IDManager.uuid4(),
+        id: idManager.uuid4(),
         name: query.name,
       };
       if (!query.id) {
