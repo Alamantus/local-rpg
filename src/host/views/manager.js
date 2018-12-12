@@ -1,14 +1,13 @@
 import html from 'choo/html';
 
-import diceTray from './views/diceTray';
+import diceTray from './diceTray';
 
-import setupView from './views/setup';
-import tableView from './views/table';
-import playersView from './views/players';
-import sheetsView from './views/sheets';
-import sheetEditor from './views/sheets/sheetEditor';
-import diceView from './views/dice';
-import notesView from './views/notes';
+import setupView from './setup';
+import tableView from './table';
+import playersView from './players';
+import sheetsView from './sheets';
+import diceView from './dice';
+import notesView from './notes';
 
 export default (state, emit) => {
   // In viewManager all we are doing is checking the app's state
@@ -33,10 +32,6 @@ export default (state, emit) => {
       }
       case 'sheets': {
         htmlContent = sheetsView(state, emit);
-        break;
-      }
-      case 'edit sheet': {
-        htmlContent = sheetEditor(state, emit);
         break;
       }
       case 'dice': {
@@ -109,6 +104,14 @@ export default (state, emit) => {
       </section>
 
       ${ diceTray(state, emit) }
+
+      ${!state.connected
+      ? html`<div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="loader"></div>
+      </div>`
+      : null
+      }
     </body>`;
   }
 

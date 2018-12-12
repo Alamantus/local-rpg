@@ -13,12 +13,8 @@ import '../global/styles/main.scss';
 
 import io from 'socket.io-client';
 import choo from 'choo';
-import html from 'choo/html';
 
-import { MovablePiece } from '../global/display/MovablePiece';
-import { FileManager } from './fileManager';
-
-import viewManager from './viewManager';
+import viewManager from './views/manager';
 
 const electronApp = window.require('electron').remote.app;
 const app = choo();
@@ -112,7 +108,7 @@ app.use((state, emitter) => {
       state.socket.on('roll die', rollData => {
         state.dieRolls.push(rollData);
 
-        if (state.currentView == 'table') {
+        if (state.currentView == 'main') {
           emitter.emit('render', () => emitter.emit('scroll log'));
         }
       });
@@ -123,7 +119,7 @@ app.use((state, emitter) => {
           time: Date.now(),
         });
 
-        if (state.currentView == 'table') {
+        if (state.currentView == 'main') {
           emitter.emit('render', () => emitter.emit('scroll log'));
         }
       });
