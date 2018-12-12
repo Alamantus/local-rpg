@@ -54,7 +54,7 @@ export default (state, emit) => {
       <div class="card">
         <div class="card-content">
           <a onclick=${() => {
-            emit('change view', 'character creation')}
+            emit('change view', 'edit sheet')}
           }>
             <h3 class="title is-3">Add New Sheet</h3>
           </a>

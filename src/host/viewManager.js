@@ -6,7 +6,7 @@ import setupView from './views/setup';
 import tableView from './views/table';
 import playersView from './views/players';
 import sheetsView from './views/sheets';
-import characterCreation from './views/characterCreation';
+import sheetEditor from './views/sheets/sheetEditor';
 import diceView from './views/dice';
 import notesView from './views/notes';
 
@@ -35,8 +35,8 @@ export default (state, emit) => {
         htmlContent = sheetsView(state, emit);
         break;
       }
-      case 'character creation': {
-        htmlContent = characterCreation(state, emit);
+      case 'edit sheet': {
+        htmlContent = sheetEditor(state, emit);
         break;
       }
       case 'dice': {

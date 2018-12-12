@@ -36,6 +36,12 @@ app.use((state, emitter) => {
   state.currentView = 'main';
   state.viewStates = {};
   state.notes = [];
+  state.sheets = [
+    {
+      name: 'test',
+      html: '<label>Name <input type="text" id="name" /><label>',
+    }
+  ];
   state.logs = [];
   state.dieRolls = [];
   state.chats = {
