@@ -6,7 +6,8 @@ export class FileManager {
   loadSession () {
     return this.state.electronApp.loadSession()
     .then(session => {
-      this.state.notes = session.notes;
+      this.state.sheets = session.hasOwnProperty('sheets') ? session.sheets : [];
+      this.state.notes = session.hasOwnProperty('notes') ? session.notes : [];
       return true;
     })
     .catch(error => {
@@ -17,9 +18,8 @@ export class FileManager {
 
   saveSession (quiet = false) {
     const sessionData = {
-      notes: this.state.hasOwnProperty('notes')
-        ? this.state.notes
-        : [],
+      sheets: this.state.hasOwnProperty('sheets') ? this.state.sheets : [],
+      notes: this.state.hasOwnProperty('notes') ? this.state.notes : [],
     }
 
     // Return the Promise.

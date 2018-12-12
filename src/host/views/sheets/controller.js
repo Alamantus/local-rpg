@@ -1,8 +1,10 @@
 import ace from 'brace';
 import 'brace/mode/html';
-import 'brace/theme/monokai';
+import 'brace/theme/chrome';
 
 import { ViewController } from '../controller';
+
+import { FileManager } from '../../fileManager';
 
 export class SheetsController extends ViewController {
   constructor (state, emit) {
@@ -12,10 +14,17 @@ export class SheetsController extends ViewController {
     });
 
     this.emit = emit;
+    this.defaultSheetName = 'New Sheet';
   }
 
   get currentSheet () {
-    return this.state.sheetToEdit != null ? this.appState.sheets[this.state.sheetToEdit] : null;
+    return this.state.sheetToEdit != null && this.appState.sheets[this.state.sheetToEdit]
+    ? this.appState.sheets[this.state.sheetToEdit]
+    : null;
+  }
+
+  editSheetName (event) {
+    this.currentSheet.name = event.target.value;
   }
 
   renderEditor () {
@@ -25,10 +34,10 @@ export class SheetsController extends ViewController {
         selectionStyle: 'text',
       });
       editor.$blockScrolling = Infinity;
-      editor.setTheme('ace/theme/monokai');
-      editor.setValue(this.appState.sheets[this.state.sheetToEdit].html);
+      editor.setTheme('ace/theme/chrome');
+      editor.setValue(this.currentSheet.html);
       editor.on('change', () => {
-        this.appState.sheets[this.state.sheetToEdit].html = editor.getValue();
+        this.currentSheet.html = editor.getValue();
       });
     }
   }
@@ -69,6 +78,20 @@ export class SheetsController extends ViewController {
   }
   
   closeSheet () {
+    if (this.state.sheetToEdit != null) {
+      if (this.currentSheet != null && this.currentSheet.name == '') {
+        this.currentSheet.name = this.defaultSheetName;
+      }
+      this.destroyEditor();
+      const fileManager = new FileManager(this.appState);
+      fileManager.saveSession(true)
+      .then(success => {
+        if (!success) {
+          alert('Could not save');
+        }
+      });
+    }
+
     this.state.sheetToEdit = null;
     this.state.showPreview = false;
     this.emit('render');

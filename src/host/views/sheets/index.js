@@ -9,8 +9,8 @@ import sheetEditor from './sheetEditor';
 export default (state, emit) => {
   const controller = new SheetsController(state, emit);
 
-  if (controller.state.sheetToEdit == null) {
-    return html`<div class="columns--sheets-view">
+  return [
+    html`<div class="columns--sheets-view">
       ${controller.appState.sheets.map((sheet, index) => {
         return html`<div class="column is-one-quarter">
           <div class="card">
@@ -33,8 +33,9 @@ export default (state, emit) => {
           </div>
         </div>
       </div>
-    </div>`;
-  } else {
-    return sheetEditor(controller);
-  }
+    </div>`,
+    controller.state.sheetToEdit != null
+    ? sheetEditor(controller)
+    : null,
+  ];
 }
