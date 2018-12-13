@@ -1,7 +1,9 @@
 import { ViewController } from '../../controller';
 
 import idManager from '../../../../global/IDManager';
-import { sheetStructure, characterSheetStructure } from '../../../../global/defaults';
+
+import { characterSheetStructure } from '../../../../global/defaults';
+import { FileManager } from '../../../fileManager';
 
 export class CharacterPanelController extends ViewController {
   constructor(state, emit) {
@@ -10,6 +12,7 @@ export class CharacterPanelController extends ViewController {
     });
 
     this.emit = emit;
+    this.fileManager = new FileManager(state);
   }
 
   get playerCharacters () {
@@ -59,7 +62,17 @@ export class CharacterPanelController extends ViewController {
       
       this.appState.sheetData.push(newCharacter);
 
-      this.showCharacter(newCharacter.id);
+      this.fileManager.saveSession(true)
+      .then(success => {
+        this.showCharacter(newCharacter.id);
+      });
+    }
+  }
+
+  deleteCurrentCharacter () {
+    if (this.currentCharacter) {
+      this.appState.sheetData = this.appState.sheetData.filter(data => data.id != this.currentCharacter.id);
+      this.close();
     }
   }
 
@@ -69,12 +82,22 @@ export class CharacterPanelController extends ViewController {
     this.reRender();
   }
 
+  close () {
+    this.state.characterShown = null;
+
+    this.fileManager.saveSession(true)
+    .then(success => {
+      this.reRender();
+    });
+  }
+
   fillSheetWithData () {
     const controller = this;
     this.currentSheet.fields.forEach(fieldId => {
       const value = this.currentCharacter.fields.hasOwnProperty(fieldId) ? this.currentCharacter.fields[fieldId] : '';
       $('#' + fieldId).val(value).change(function() {
         controller.currentCharacter.fields[fieldId] = $(this).val();
+
         if (fieldId == 'name') {
           controller.reRender();
         }

@@ -36,5 +36,16 @@ export default (controller) => {
       </div>
     </div>`,
     sheetHTML,
+    html`<div class="field">
+      <div class="control">
+        <button class="button is-success" onclick=${ () => controller.close()}>
+          Save & Close
+        </button>
+        <button class="button is-small is-danger is-pulled-right"
+          onclick=${ () => controller.deleteCurrentCharacter() }>
+          Delete
+        </button>
+      </div>
+    </div>`,
   ];
 }
