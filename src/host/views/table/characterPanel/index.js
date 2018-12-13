@@ -2,10 +2,29 @@ import html from 'choo/html';
 
 import { CharacterPanelController } from './controller';
 import characterSheet from './characterSheet';
+import chat from './chat';
 
 export default (state, emit) => {
   const controller = new CharacterPanelController(state, emit);
 
+  let tabContent = null;
+  if (controller.state.characterShown != null) {
+    switch (controller.state.showTab) {
+      default:
+      case 'sheet': {
+        tabContent = characterSheet(controller);
+        break;
+      }
+      case 'chat': {
+        tabContent = chat(controller);
+        break;
+      }
+      case 'items': {
+        break;
+      }
+    }
+  }
+  
   return html`<div class="columns">
     <div class="column is-one-quarter">
       <nav class="panel">
@@ -45,9 +64,31 @@ export default (state, emit) => {
     </div>
     <div class="column is-three-quarters">
       ${controller.state.characterShown != null
-      ? characterSheet(controller)
-      : null
-      }
+      ? [
+        html`<div class="tabs">
+          <ul>
+            <li class="${controller.state.showTab == 'sheet' ? 'is-active' : ''}">
+              <a onclick=${() => controller.showTab('sheet')}>
+                Sheet
+              </a>
+            </li>
+            ${controller.currentCharacter.owner != null
+            ? html`<li class="${controller.state.showTab == 'chat' ? 'is-active' : ''}">
+              <a onclick=${() => controller.showTab('chat')}>
+                Whisper
+              </a>
+            </li>`
+            : null}
+            <li class="${controller.state.showTab == 'items' ? 'is-active' : ''}">
+              <a onclick=${() => controller.showTab('items')}>
+                Items
+              </a>
+            </li>
+          </ul>
+        </div>`,
+        tabContent,
+      ] : null}
+
     </div>
   </div>`;
 }

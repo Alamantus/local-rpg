@@ -9,6 +9,7 @@ export class CharacterPanelController extends ViewController {
   constructor(state, emit) {
     super(state, 'characterPanel', {
       characterShown: null,
+      showTab: 'sheet',
     });
 
     this.emit = emit;
@@ -34,7 +35,18 @@ export class CharacterPanelController extends ViewController {
   }
 
   get players () {
-    return this.appState.server.connections.map(connection => connection.user).filter(user => user.id != this.appState.user.id);
+    return this.appState.server.connections
+    .map(connection => connection.user)
+    // .filter(user => user.id != this.appState.user.id);  // This is only commented for testing!
+  }
+
+  get messagesFromCharacterOwner () {
+    if (this.currentCharacter && this.currentCharacter.owner != null) {
+      return this.appState.chats.hasOwnProperty(this.currentCharacter.owner)
+      ? this.appState.chats[this.currentCharacter.owner]
+      : [];
+    }
+    return [];
   }
 
   getOwner (ownerId) {
@@ -78,8 +90,17 @@ export class CharacterPanelController extends ViewController {
 
   showCharacter (characterId) {
     this.state.characterShown = characterId;
+    this.state.showTab = 'sheet';
 
     this.reRender();
+  }
+
+  showTab (tab) {
+    if (tab != this.state.showTab) {
+      this.state.showTab = tab;
+
+      this.reRender();
+    }
   }
 
   close () {
@@ -105,7 +126,27 @@ export class CharacterPanelController extends ViewController {
     });
   }
 
+  scrollChatToBottom () {
+    const chat = document.getElementById('chat');
+    $(chat).animate({ scrollTop: chat.scrollHeight });
+  }
+
   reRender () {
-    this.emit('render', () => this.fillSheetWithData());
+    this.emit('render', () => {
+      switch(this.state.showTab) {
+        default:
+        case 'sheet': {
+          this.fillSheetWithData();
+          break;
+        }
+        case 'chat': {
+          this.scrollChatToBottom();
+          break;
+        }
+        case 'items': {
+          break;
+        }
+      }
+    });
   }
 }
