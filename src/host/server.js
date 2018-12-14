@@ -65,9 +65,13 @@ class Server {
       } else {
         socket.user.id = query.id;
       }
-      console.log('query', query.id, typeof query.id);
-      console.log('result', socket.user.id);
-      this.connections.push(socket);
+      const existingConnection = this.connections.findIndex(connection => connection.user.id == socket.user.id);
+      if (existingConnection >= 0) {
+        this.connections[existingConnection].disconnect();
+        this.connections[existingConnection] = socket;
+      } else {
+        this.connections.push(socket);
+      }
 
       this.emit('log', `User "${socket.user.name}" (${socket.user.id}) connected`);
 
