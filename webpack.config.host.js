@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackExport = require('./webpack.config.base.js');
 
-webpackExport.entry = path.resolve(__dirname, 'src/host', 'dm.js');
-webpackExport.output.filename = 'dm.js';
+webpackExport.entry = path.resolve(__dirname, 'src/host', 'index.js');
+webpackExport.output.filename = 'host.js';
 
 webpackExport.plugins.push(new webpack.DefinePlugin({
   BASEPATH: JSON.stringify(''),

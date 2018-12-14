@@ -82,7 +82,7 @@ export default (state, emit) => {
           <div class="control">
             <div class="tags has-addons">
               <span class="tag is-info">Players connect to:</span>
-              <a class="tag" onclick=${() => state.electronApp.copyServeURL()}>
+              <a class="tag" onclick=${() => state.app.copyServeURL()}>
                 <span>${state.server.connectURL}</span>
                 <span class="icon"><i class="fa fa-files-o"></i></span>
               </a>
@@ -91,8 +91,8 @@ export default (state, emit) => {
           <div class="control">
             <div class="tags has-addons">
               <span class="tag is-info">Share files from:</span>
-              <a class="tag" onclick=${() => state.electronApp.openFilesLocation()}>
-                <span>${state.electronApp.filesLocation}</span>
+              <a class="tag" onclick=${() => state.app.openFilesLocation()}>
+                <span>${state.app.filesLocation}</span>
                 <span class="icon"><i class="fa fa-folder-open"></i></span>
               </a>
             </div>

@@ -4,7 +4,7 @@ export class FileManager {
   }
 
   loadSession () {
-    return this.state.electronApp.loadSession()
+    return this.state.app.loadSession()
     .then(session => {
       this.state.sheets = session.hasOwnProperty('sheets') ? session.sheets : [];
       this.state.sheetData = session.hasOwnProperty('sheetData') ? session.sheetData : [];
@@ -25,8 +25,9 @@ export class FileManager {
     }
 
     // Return the Promise.
-    return this.state.electronApp.saveSession(sessionData, quiet)
+    return this.state.app.saveSession(sessionData, quiet)
     .then(() => {
+      this.state.isNewSaveFile = true;
       return true;
     })
     .catch(error => {

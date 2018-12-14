@@ -9,6 +9,7 @@ require('electron-reload')(path.resolve(__dirname, '../../build'));
 class App {
   constructor () {
     app.app = this;
+    this.electron = app;
     this.win = null;
 
     this.server = require('./server');
@@ -80,21 +81,25 @@ class App {
   loadSession () {
     fs.dir(path.resolve('./sessions'));
 
-    this.sessionSaveLocation = dialog.showOpenDialog(this.win, {
-      title: 'Open Session',
-      defaultPath: path.resolve('./sessions'),
-      filters: [
-        {
-          name: 'JSON',
-          extensions: ['json'],
-        },
-      ],
-    });
+    if (!this.electron.sessionSaveLocation) {
+      this.electron.sessionSaveLocation = dialog.showOpenDialog(this.win, {
+        title: 'Open Session',
+        defaultPath: path.resolve('./sessions'),
+        filters: [
+          {
+            name: 'JSON',
+            extensions: ['json'],
+          },
+        ],
+      });
+      if (this.electron.sessionSaveLocation) {
+        this.electron.sessionSaveLocation = this.electron.sessionSaveLocation[0];
+      }
+    }
 
-    if (this.sessionSaveLocation) {
-      this.sessionSaveLocation = this.sessionSaveLocation[0];
+    if (this.electron.sessionSaveLocation) {
       // fs-jetpack "async" methods return Promises.
-      return fs.readAsync(this.sessionSaveLocation, 'json');
+      return fs.readAsync(this.electron.sessionSaveLocation, 'json');
     }
 
     // If no sessionSaveLocation is set (the dialog is canceled), return a rejected Promise.
@@ -106,10 +111,10 @@ class App {
   saveSession (sessionData, quiet = false) {
     const data = JSON.stringify(sessionData);
 
-    if (!this.sessionSaveLocation) {
+    if (!this.electron.sessionSaveLocation) {
       fs.dir(path.resolve('./sessions'));
 
-      this.sessionSaveLocation = dialog.showSaveDialog(this.win, {
+      this.electron.sessionSaveLocation = dialog.showSaveDialog(this.win, {
         title: 'Save Session',
         defaultPath: path.resolve('./sessions/session.json'),
         filters: [
@@ -121,13 +126,13 @@ class App {
       });
     }
 
-    if (this.sessionSaveLocation) {
+    if (this.electron.sessionSaveLocation) {
       // fs-jetpack "async" methods return Promises.
-      return fs.writeAsync(this.sessionSaveLocation, data).then(() => {
+      return fs.writeAsync(this.electron.sessionSaveLocation, data).then(() => {
         if (!quiet) {
           dialog.showMessageBox({
             title: 'Success!',
-            message: `Saved to ${this.sessionSaveLocation}`,
+            message: `Saved to ${this.electron.sessionSaveLocation}`,
           });
         }
       });

@@ -14,6 +14,7 @@ import '../global/styles/main.scss';
 import io from 'socket.io-client';
 import choo from 'choo';
 
+import { FileManager } from './fileManager';
 import viewManager from './views/manager';
 
 const electronApp = window.require('electron').remote.app;
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // App state and emitters
 app.use((state, emitter) => {
-  state.electronApp = electronApp.app;
+  state.app = electronApp.app;
   state.server = electronApp.app.server;
   state.socket = null;
   state.connected = false;
@@ -125,8 +126,16 @@ app.use((state, emitter) => {
       });
 
       state.connected = true;
-      console.log('connected');
-      emitter.emit('render');
+      
+      if (!this.state.app.electron.sessionSaveLocation || this.state.isNewSaveFile) {
+        emitter.emit('render');
+      } else {
+        const fileManager = new FileManager(state);
+        fileManager.loadSession(true)
+        .then(loaded => {
+          emitter.emit('render');
+        });
+      }
     });
 
     emitter.on('save user', () => {
