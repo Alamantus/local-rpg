@@ -116,8 +116,16 @@ export class CharacterPanelController extends ViewController {
     const controller = this;
     this.currentSheet.fields.forEach(fieldId => {
       const value = this.currentCharacter.fields.hasOwnProperty(fieldId) ? this.currentCharacter.fields[fieldId] : '';
-      $('#' + fieldId).val(value).change(function() {
-        controller.currentCharacter.fields[fieldId] = $(this).val();
+
+      if (typeof value === "boolean") {
+        $('#' + fieldId)[0].checked = value;
+      } else {
+        $('#' + fieldId).val(value);
+      }
+
+      $('#' + fieldId).change(function() {
+        const isCheckRadio = $(this).is(':checkbox') || $(this).is(':radio');
+        controller.currentCharacter.fields[fieldId] = isCheckRadio ? this.checked : $(this).val();
 
         if (fieldId == 'name') {
           controller.reRender();
