@@ -11,15 +11,15 @@ export default (state, emit) => {
   const controller = new TableController(state);
 
   return [
-    html`<div class="tile is-ancestor" style="height:100%;">
-      <div class="tile is-parent is-8">
+    html`<div class="tile is-ancestor height-100">
+      <div class="tile is-parent is-8 height-100">
         <article class="tile is-child box">
           <h2 class="title">Characters</h2>
           ${characterPanel(state, emit)}
         </article>
       </div>
 
-      <div class="tile is-parent is-vertical is-4">
+      <div class="tile is-parent is-vertical is-4 height-100">
         <article class="tile is-child box">
           <h2 class="title">Log</h2>
           <div id="log">

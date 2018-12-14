@@ -1,7 +1,7 @@
 import html from 'choo/html';
 
 export default (controller) => {
-  const sheetHTML = html`<div></div>`;
+  const sheetHTML = html`<div style="max-height:50vh;overflow:auto;"></div>`;
   sheetHTML.innerHTML = controller.currentSheet ? controller.currentSheet.html : '';
   
   return [

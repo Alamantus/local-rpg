@@ -4,6 +4,8 @@ import { CharacterPanelController } from './controller';
 import characterSheet from './characterSheet';
 import chat from './chat';
 
+import './styles.scss';
+
 export default (state, emit) => {
   const controller = new CharacterPanelController(state, emit);
 
@@ -26,7 +28,7 @@ export default (state, emit) => {
   }
   
   return html`<div class="columns">
-    <div class="column is-one-quarter">
+    <div class="column is-one-quarter character-panel-column">
       <nav class="panel">
         <a class="panel-block button is-success" onclick=${() => controller.createCharacter()}>
           <span>Create Character</span>
@@ -62,7 +64,7 @@ export default (state, emit) => {
         })}
       </nav>
     </div>
-    <div class="column is-three-quarters">
+    <div class="column is-three-quarters character-panel-column">
       ${controller.state.characterShown != null
       ? [
         html`<div class="tabs">
