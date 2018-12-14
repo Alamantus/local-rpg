@@ -89,22 +89,21 @@ export class SheetsController extends ViewController {
   }
   
   closeSheet () {
-    if (this.state.sheetToEdit != null) {
+    if (this.state.sheetToEdit !== null) {
       if (this.currentSheet != null) {
         if (this.currentSheet.name == '') {
           this.currentSheet.name = this.defaultSheetName;
         }
 
-        this.currentSheet.fields = ['name'];
-        const controller = this;
-        const sheetHTML = html`<div></div>`;
-        sheetHTML.innerHTML = this.currentSheet.html;
+        const fields = ['name'];
+        const sheetHTML = this.getSheetPreviewHTML();
         $(sheetHTML).find('input, select, textarea').each(function() {
           const elementId = $(this).attr('id');
-          if (elementId && !controller.currentSheet.fields.includes(elementId)) {
-            controller.currentSheet.fields.push(elementId);
+          if (elementId && !fields.includes(elementId)) {
+            fields.push(elementId);
           }
         });
+        this.currentSheet.fields = fields;
       }
 
       this.destroyEditor();
