@@ -13,7 +13,7 @@ export default (controller) => {
             <div class="select">
               <select onchange=${event => controller.changeSheet(event)}>
                 ${controller.appState.sheets.map(sheet => {
-                  return html`<option value="${sheet.id}">${sheet.name}</option>`;
+                  return html`<option value="${sheet.id}" selected=${sheet.id == controller.currentSheet.id}>${sheet.name}</option>`;
                 })}
               </select>
             </div>
@@ -27,7 +27,7 @@ export default (controller) => {
             <div class="select">
               <select onchange=${event => controller.changeOwner(event)}>
                 ${[{id: null, name: controller.appState.user.name}, ...controller.players].map(player => {
-                  return html`<option value="${player.id}">${player.name}</option>`;
+                  return html`<option value="${player.id}" selected=${player.id == controller.currentCharacter.owner}>${player.name}</option>`;
                 })}
               </select>
             </div>

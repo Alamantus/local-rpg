@@ -50,11 +50,15 @@ export class CharacterPanelController extends ViewController {
   }
 
   getOwner (ownerId) {
-    return this.appState.server.connections.find(connection => connection.user.id == ownerId);
+    const ownerConnection = this.appState.server.connections.find(connection => connection.user.id == ownerId);
+    if (ownerConnection) {
+      return ownerConnection.user;
+    }
+    return undefined;
   }
 
   changeOwner (event) {
-    this.currentCharacter.owner = event.target.value;
+    this.currentCharacter.owner = event.target.value != 'null' ? event.target.value : null;
     this.reRender();
   }
 
