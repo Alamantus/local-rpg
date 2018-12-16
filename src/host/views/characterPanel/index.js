@@ -2,7 +2,7 @@ import html from 'choo/html';
 
 import { CharacterPanelController } from './controller';
 import characterSheet from './characterSheet';
-import chat from './chat';
+import chat from '../chat';
 
 import './styles.scss';
 
@@ -18,7 +18,7 @@ export default (state, emit) => {
         break;
       }
       case 'chat': {
-        tabContent = chat(controller);
+        tabContent = chat(controller.appState, controller.emit, controller.currentCharacter.owner);
         break;
       }
       case 'items': {

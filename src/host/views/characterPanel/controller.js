@@ -1,9 +1,9 @@
-import { ViewController } from '../../controller';
+import { ViewController } from '../controller';
 
-import idManager from '../../../../global/IDManager';
+import idManager from '../../../global/IDManager';
 
-import { characterSheetStructure } from '../../../../global/defaults';
-import { FileManager } from '../../../fileManager';
+import { characterSheetStructure } from '../../../global/defaults';
+import { FileManager } from '../../fileManager';
 
 export class CharacterPanelController extends ViewController {
   constructor(state, emit) {

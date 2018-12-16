@@ -37,9 +37,7 @@ app.use((state, emitter) => {
   state.notes = [];
   state.logs = [];
   state.dieRolls = [];
-  state.chats = {
-    main: [],
-  };
+  state.chats = [];
 
   let storedServerSettings = localStorage.getItem('localRPG-lastServerSettings');
   if (storedServerSettings) {

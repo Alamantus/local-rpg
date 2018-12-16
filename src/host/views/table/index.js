@@ -5,7 +5,7 @@ import './styles.scss';
 
 import { TableController } from './controller';
 import dieRoll from './dieRoll';
-import characterPanel from './characterPanel';
+import characterPanel from '../characterPanel';
 
 export default (state, emit) => {
   const controller = new TableController(state);
