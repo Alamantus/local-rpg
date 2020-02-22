@@ -2,10 +2,7 @@
   "name": "local-rpg",
   "version": "0.0.1",
   "description": "A platform for serving role playing resources over a local network.",
-  "contributors": [
-    "Robbie Antenesse <dev@alamantus.com> (http://robbie.antenesse.net)",
-    "Ryan Stong <rvanstong@gmail.com> (https://descartez.github.io/)"
-  ],
+  "author": "Robbie Antenesse <dev@alamantus.com> (http://robbie.antenesse.net)",
   "repository": {
     "type": "git",
     "url": "https://github.com/Alamantus/local-rpg.git"
@@ -15,22 +12,11 @@
     "url": "https://github.com/Alamantus/local-rpg/issues",
     "email": "dev@alamantus.com"
   },
-  "main": "./src/host/app.js",
+  "main": "./src/index.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run watch\" \"npm run start:app\"",
-    "dev:host": "concurrently --kill-others \"npm run watch:host\" \"npm run start:app\"",
-    "dev:client": "concurrently --kill-others \"npm run watch:client\" \"npm run start:app\"",
-    "start": "npm run build && npm run start:app",
-    "start:app": "electron ./src/host/app.js",
-    "dist": "npm run build && electron-builder",
-    "build": "npm run build:clean && npm run build:host && npm run build:client",
-    "build:clean": "rimraf ./build ./dist",
-    "build:client": "webpack --config webpack.config.client.js --progress --colors",
-    "build:host": "webpack --config webpack.config.host.js --progress --colors",
-    "watch": "concurrently --kill-others \"npm run watch:host\" \"npm run watch:client\"",
-    "watch:client": "webpack --config webpack.config.client.js --watch --progress --colors",
-    "watch:host": "webpack --config webpack.config.host.js --watch --progress --colors",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "node ./dev/postinstall.js",
+    "dev": "esbuild --bundle --sourcemap --outdir=app src/index.js",
+    "build": "esbuild --bundle --minify --outdir=app src/index.js"
   },
   "build": {
     "appId": "com.electron.local-rpg",
@@ -46,37 +32,19 @@
     "asarUnpack": "./build/client/*"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.7.0",
     "choo-devtools": "^2.5.1",
     "concurrently": "^4.1.0",
-    "css-loader": "^0.28.7",
-    "electron": "^3.0.10",
-    "electron-builder": "^20.38.2",
-    "electron-reload": "^1.2.2",
-    "file-loader": "^1.1.5",
-    "html-webpack-plugin": "^2.30.1",
-    "image-webpack-loader": "^3.4.2",
-    "node-sass": "^4.10.0",
-    "rimraf": "^2.6.2",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.19.0",
-    "url-loader": "^0.6.2",
-    "webpack": "^3.6.0"
+    "esbuild-windows-64": "^0.0.9",
+    "git-clone": "^0.1.0",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
+    "@alamantus/lighter": "^1.0.1",
     "brace": "^0.11.1",
-    "bulma": "^0.7.2",
     "choo": "^6.4.2",
+    "dayjs": "^1.8.20",
     "express": "^4.16.2",
-    "font-awesome": "^4.7.0",
     "fs-jetpack": "^2.2.0",
-    "jquery": "^3.2.1",
-    "jquery-ui": "^1.12.1",
-    "jquery-ui-touch-punch": "^0.2.3",
-    "moment": "^2.22.2",
     "on-load": "^4.0.1",
     "serve-index": "^1.9.1",
     "socket.io": "^2.2.0",
